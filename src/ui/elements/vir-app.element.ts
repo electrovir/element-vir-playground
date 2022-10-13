@@ -60,7 +60,7 @@ export const VirApp = defineElementNoInputs({
                     })}
                 ></${VirElementViewer}>
             </main>
-            <footer>
+            <footer ?hidden=${!state.editorLoaded}>
                 <button
                     ${listen('click', () => {
                         clearStoredCode();
