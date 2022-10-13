@@ -1,4 +1,4 @@
-const defaultInitText: string = `import {css, defineElement, html} from 'element-vir';
+const defaultInitText: string = `import {css, assign, defineElement, html} from 'element-vir';
 
 export const MyElement = defineElement<{text: string}>()({
     tagName: 'my-element',
@@ -42,7 +42,7 @@ export const MyElement2 = defineElement()({
 });
 `;
 
-const version = 2;
+const version = 3;
 
 const key = `element-vir-code-input-v${version}`;
 

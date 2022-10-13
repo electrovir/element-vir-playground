@@ -1,4 +1,5 @@
 import {assign, css, defineElementNoInputs, html, listen} from 'element-vir';
+import {classMap} from 'lit/directives/class-map.js';
 import {clearStoredCode, getInitialCode} from '../../data/get-initial-code';
 import {pickIf} from '../directives/pick-if';
 import {VirEditor} from './vir-editor.element';
@@ -28,6 +29,19 @@ export const VirApp = defineElementNoInputs({
 
         footer {
             margin: 32px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .github {
+            height: 38px;
+            width: 38px;
         }
     `,
     renderCallback: ({state, updateState}) => {
@@ -60,13 +74,18 @@ export const VirApp = defineElementNoInputs({
                     })}
                 ></${VirElementViewer}>
             </main>
-            <footer ?hidden=${!state.editorLoaded}>
+            <footer class=${classMap({
+                hidden: !state.editorLoaded,
+            })}>
                 <button
                     ${listen('click', () => {
                         clearStoredCode();
                         window.location.reload();
                     })}
                 >reset</button>
+                <a href="https://github.com/electrovir/element-vir-playground">
+                    <img class="github" src="/public/github.svg" />
+                </a>
             </footer>
         `;
     },
