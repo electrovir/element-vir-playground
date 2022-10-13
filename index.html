@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <script>
+            window.editorPromise = new Promise((resolve, reject) => {
+                window.resolveEditorPromise = resolve;
+                window.rejectEditorPromise = reject;
+            });
+        </script>
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+        <script type="module" src="/src/ui/elements/vir-app.element.ts"></script>
+    </head>
+    <body>
+        <vir-app></vir-app>
+        <script>
+            // First set up the VSCode loader in a script tag
+            const getLoaderScript = document.createElement('script');
+            getLoaderScript.src = 'https://www.typescriptlang.org/js/vs.loader.js';
+            getLoaderScript.async = true;
+            getLoaderScript.onload = () => {
+                // Now the loader is ready, tell require where it can get the version of monaco, and the sandbox
+                // This version uses the latest version of the sandbox, which is used on the TypeScript website
+
+                // For the monaco version you can use unpkg or the TypeScript web infra CDN
+                // You can see the available releases for TypeScript here:
+                // https://typescript.azureedge.net/indexes/releases.json
+                //
+                require.config({
+                    paths: {
+                        // vs: 'https://typescript.azureedge.net/cdn/4.0.5/monaco/min/vs',
+                        vs: 'https://unpkg.com/@typescript-deploys/monaco-editor@4.0.5/min/vs',
+                        sandbox: 'https://www.typescriptlang.org/js/sandbox',
+                    },
+                    // This is something you need for monaco to work
+                    ignoreDuplicateModules: ['vs/editor/editor.main'],
+                });
+
+                // Grab a copy of monaco, TypeScript and the sandbox
+                require([
+                    'vs/editor/editor.main',
+                    'vs/language/typescript/tsWorker',
+                    'sandbox/index',
+                ], (main, _tsWorker, sandboxFactory) => {
+                    const isOK = main && window.ts && sandboxFactory;
+                    if (isOK) {
+                        window.resolveEditorPromise({
+                            sandbox: sandboxFactory,
+                            monaco: main,
+                            ts: window.ts,
+                        });
+                    } else {
+                        window.rejectEditorPromise(
+                            'Could not get all the dependencies of sandbox set up!',
+                        );
+                        console.error('main', main, 'ts', window.ts, 'sandbox', sandbox);
+                        return;
+                    }
+                });
+            };
+            document.body.appendChild(getLoaderScript);
+        </script>
+    </body>
+</html>
