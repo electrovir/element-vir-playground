@@ -84,7 +84,7 @@ export const VirApp = defineElementNoInputs({
                     })}
                 >reset</button>
                 <a href="https://github.com/electrovir/element-vir-playground">
-                    <img class="github" src="/github.svg" />
+                    <img class="github" src="github.svg" />
                 </a>
             </footer>
         `;
