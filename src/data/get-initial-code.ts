@@ -43,6 +43,16 @@ return html \`
 
 const version = 1;
 
+const key = `element-vir-code-input-v${version}`;
+
 export function getInitialCode() {
-    return window.localStorage.getItem(`element-vir-code-input-v${version}`) ?? defaultInitText;
+    return window.localStorage.getItem(key) ?? defaultInitText;
+}
+
+export function storeCode(code: string) {
+    window.localStorage.setItem(key, code);
+}
+
+export function clearStoredCode() {
+    window.localStorage.removeItem(key);
 }

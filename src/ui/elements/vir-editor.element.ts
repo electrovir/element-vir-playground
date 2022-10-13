@@ -2,6 +2,7 @@ import * as TypeScriptSandbox from '@typescript/sandbox';
 import {randomString} from 'augment-vir';
 import {defineElement, defineElementEvent, html, onDomCreated} from 'element-vir';
 import * as monaco from 'monaco-editor';
+import {storeCode} from '../../data/get-initial-code';
 import {addEventListeners} from '../directives/add-event-listeners';
 
 function getGlobalEditorPromise(): Promise<{
@@ -47,13 +48,13 @@ export const VirEditor = defineElement<{initialText: string}>()({
                 if (!state.sandbox) {
                     return;
                 }
+                storeCode(state.sandbox.getText());
                 const result = await state.sandbox.getEmitResult();
                 const outputText = result.outputFiles[0]?.text;
                 if (!outputText) {
                     throw new Error(`no output text`);
                 }
 
-                window.localStorage.setItem('element-vir-code-input', outputText);
                 dispatch(new events.codeChange(outputText));
             }, debounceTimeout);
         }
