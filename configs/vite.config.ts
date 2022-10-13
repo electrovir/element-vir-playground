@@ -5,7 +5,7 @@ export default defineConfig({
     ...baseViteConfig,
     ...(process.env.CI
         ? {
-              base: '/element-vir-playground/',
+              base: `/${process.env.npm_package_name}/`,
           }
         : {}),
 });
