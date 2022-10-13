@@ -16,6 +16,7 @@ export const VirElementViewer = defineElement<{
     `,
     renderCallback: ({inputs}) => {
         const {transformedCode, tagNames} = transformCode(inputs.code);
+        console.log('evaling code');
         eval(transformedCode);
         return html`
             ${unsafeHTML(tagNames.map((tagName) => `<${tagName}></${tagName}>`).join('<br />'))}
