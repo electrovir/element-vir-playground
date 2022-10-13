@@ -51,6 +51,7 @@
     "dependencies": {
         "augment-vir": "^3.0.2",
         "element-vir": "^6.2.0",
-        "lit": "^2.4.0"
+        "lit": "^2.4.0",
+        "monaco-editor": "^0.34.0"
     }
 }
