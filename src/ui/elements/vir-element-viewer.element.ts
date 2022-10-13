@@ -1,9 +1,9 @@
 import {randomString, safeMatch} from 'augment-vir';
+import * as elementVir from 'element-vir';
 import {css, defineElement, html} from 'element-vir';
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
 
-// keep a reference to this so the eval can use it
-(window as any).html = html;
+(window as any).elementVir = elementVir;
 
 export const VirElementViewer = defineElement<{
     code: string;
@@ -40,10 +40,13 @@ function transformCode(code: string) {
         (tagNameDefinition) => safeMatch(tagNameDefinition, /tagName: '(.+)'/)[1],
     );
 
-    code = code.replace(/ html\s*`/g, ' window.html`');
-
     return {
-        transformedCode: code.replace(/import [^;]+;/g, '').replace(/export/g, ''),
+        transformedCode: code
+            .replace(/import [^;]+;/g, '')
+            .replace(/export/g, '')
+            .replace(/ html\s*`/g, ' window.elementVir.html`')
+            .replace(/(\W)assign\s*\(/g, '$1window.elementVir.assign(')
+            .replace(/(\W)listen\s*\(/g, '$1window.elementVir.listen('),
         tagNames,
     };
 }

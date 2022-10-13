@@ -3,7 +3,9 @@ import {pickIf} from '../directives/pick-if';
 import {VirEditor} from './vir-editor.element';
 import {VirElementViewer} from './vir-element-viewer.element';
 
-const initialText: string = `import {defineElement, html, css} from 'element-vir';
+const initialText: string =
+    window.localStorage.getItem('element-vir-code-input') ??
+    `import {defineElement, html, css} from 'element-vir';
 
 export const MyElement = defineElement<{text: string}>()({
     tagName: 'my-element',

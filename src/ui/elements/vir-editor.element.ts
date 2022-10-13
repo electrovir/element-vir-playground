@@ -34,6 +34,8 @@ export const VirEditor = defineElement<{initialText: string}>()({
             if (!outputText) {
                 throw new Error(`no output text`);
             }
+
+            window.localStorage.setItem('element-vir-code-input', outputText);
             dispatch(new events.codeChange(outputText));
         }
 
