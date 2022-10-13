@@ -1,11 +1,2597 @@
-var Ge=Object.defineProperty;var Qe=(e,n,i)=>n in e?Ge(e,n,{enumerable:!0,configurable:!0,writable:!0,value:i}):e[n]=i;var A=(e,n,i)=>(Qe(e,typeof n!="symbol"?n+"":n,i),i);import{m as Ze}from"./index.68721f69.js";/*!-----------------------------------------------------------------------------
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+import { m as monaco_editor_core_star } from "./index.68721f69.js";
+/*!-----------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Version: 0.34.0(9d278685b078158491964f8fd7ac9628fffa0f30)
  * Released under the MIT license
  * https://github.com/microsoft/monaco-editor/blob/main/LICENSE.txt
- *-----------------------------------------------------------------------------*/var Ke=Object.defineProperty,et=Object.getOwnPropertyDescriptor,tt=Object.getOwnPropertyNames,rt=Object.prototype.hasOwnProperty,oe=(e,n,i,r)=>{if(n&&typeof n=="object"||typeof n=="function")for(let t of tt(n))!rt.call(e,t)&&t!==i&&Ke(e,t,{get:()=>n[t],enumerable:!(r=et(n,t))||r.enumerable});return e},nt=(e,n,i)=>(oe(e,n,"default"),i&&oe(i,n,"default")),l={};nt(l,Ze);var it=2*60*1e3,at=class{constructor(e){A(this,"_defaults");A(this,"_idleCheckInterval");A(this,"_lastUsedTime");A(this,"_configChangeListener");A(this,"_worker");A(this,"_client");this._defaults=e,this._worker=null,this._client=null,this._idleCheckInterval=window.setInterval(()=>this._checkIfIdle(),30*1e3),this._lastUsedTime=0,this._configChangeListener=this._defaults.onDidChange(()=>this._stopWorker())}_stopWorker(){this._worker&&(this._worker.dispose(),this._worker=null),this._client=null}dispose(){clearInterval(this._idleCheckInterval),this._configChangeListener.dispose(),this._stopWorker()}_checkIfIdle(){if(!this._worker)return;Date.now()-this._lastUsedTime>it&&this._stopWorker()}_getClient(){return this._lastUsedTime=Date.now(),this._client||(this._worker=l.editor.createWebWorker({moduleId:"vs/language/json/jsonWorker",label:this._defaults.languageId,createData:{languageSettings:this._defaults.diagnosticsOptions,languageId:this._defaults.languageId,enableSchemaRequest:this._defaults.diagnosticsOptions.enableSchemaRequest}}),this._client=this._worker.getProxy()),this._client}getLanguageServiceWorker(...e){let n;return this._getClient().then(i=>{n=i}).then(i=>{if(this._worker)return this._worker.withSyncedResources(e)}).then(i=>n)}},ue;(function(e){e.MIN_VALUE=-2147483648,e.MAX_VALUE=2147483647})(ue||(ue={}));var Y;(function(e){e.MIN_VALUE=0,e.MAX_VALUE=2147483647})(Y||(Y={}));var T;(function(e){function n(r,t){return r===Number.MAX_VALUE&&(r=Y.MAX_VALUE),t===Number.MAX_VALUE&&(t=Y.MAX_VALUE),{line:r,character:t}}e.create=n;function i(r){var t=r;return o.objectLiteral(t)&&o.uinteger(t.line)&&o.uinteger(t.character)}e.is=i})(T||(T={}));var _;(function(e){function n(r,t,a,s){if(o.uinteger(r)&&o.uinteger(t)&&o.uinteger(a)&&o.uinteger(s))return{start:T.create(r,t),end:T.create(a,s)};if(T.is(r)&&T.is(t))return{start:r,end:t};throw new Error("Range#create called with invalid arguments["+r+", "+t+", "+a+", "+s+"]")}e.create=n;function i(r){var t=r;return o.objectLiteral(t)&&T.is(t.start)&&T.is(t.end)}e.is=i})(_||(_={}));var te;(function(e){function n(r,t){return{uri:r,range:t}}e.create=n;function i(r){var t=r;return o.defined(t)&&_.is(t.range)&&(o.string(t.uri)||o.undefined(t.uri))}e.is=i})(te||(te={}));var ce;(function(e){function n(r,t,a,s){return{targetUri:r,targetRange:t,targetSelectionRange:a,originSelectionRange:s}}e.create=n;function i(r){var t=r;return o.defined(t)&&_.is(t.targetRange)&&o.string(t.targetUri)&&(_.is(t.targetSelectionRange)||o.undefined(t.targetSelectionRange))&&(_.is(t.originSelectionRange)||o.undefined(t.originSelectionRange))}e.is=i})(ce||(ce={}));var re;(function(e){function n(r,t,a,s){return{red:r,green:t,blue:a,alpha:s}}e.create=n;function i(r){var t=r;return o.numberRange(t.red,0,1)&&o.numberRange(t.green,0,1)&&o.numberRange(t.blue,0,1)&&o.numberRange(t.alpha,0,1)}e.is=i})(re||(re={}));var de;(function(e){function n(r,t){return{range:r,color:t}}e.create=n;function i(r){var t=r;return _.is(t.range)&&re.is(t.color)}e.is=i})(de||(de={}));var fe;(function(e){function n(r,t,a){return{label:r,textEdit:t,additionalTextEdits:a}}e.create=n;function i(r){var t=r;return o.string(t.label)&&(o.undefined(t.textEdit)||L.is(t))&&(o.undefined(t.additionalTextEdits)||o.typedArray(t.additionalTextEdits,L.is))}e.is=i})(fe||(fe={}));var W;(function(e){e.Comment="comment",e.Imports="imports",e.Region="region"})(W||(W={}));var le;(function(e){function n(r,t,a,s,u){var c={startLine:r,endLine:t};return o.defined(a)&&(c.startCharacter=a),o.defined(s)&&(c.endCharacter=s),o.defined(u)&&(c.kind=u),c}e.create=n;function i(r){var t=r;return o.uinteger(t.startLine)&&o.uinteger(t.startLine)&&(o.undefined(t.startCharacter)||o.uinteger(t.startCharacter))&&(o.undefined(t.endCharacter)||o.uinteger(t.endCharacter))&&(o.undefined(t.kind)||o.string(t.kind))}e.is=i})(le||(le={}));var ne;(function(e){function n(r,t){return{location:r,message:t}}e.create=n;function i(r){var t=r;return o.defined(t)&&te.is(t.location)&&o.string(t.message)}e.is=i})(ne||(ne={}));var N;(function(e){e.Error=1,e.Warning=2,e.Information=3,e.Hint=4})(N||(N={}));var ge;(function(e){e.Unnecessary=1,e.Deprecated=2})(ge||(ge={}));var he;(function(e){function n(i){var r=i;return r!=null&&o.string(r.href)}e.is=n})(he||(he={}));var $;(function(e){function n(r,t,a,s,u,c){var d={range:r,message:t};return o.defined(a)&&(d.severity=a),o.defined(s)&&(d.code=s),o.defined(u)&&(d.source=u),o.defined(c)&&(d.relatedInformation=c),d}e.create=n;function i(r){var t,a=r;return o.defined(a)&&_.is(a.range)&&o.string(a.message)&&(o.number(a.severity)||o.undefined(a.severity))&&(o.integer(a.code)||o.string(a.code)||o.undefined(a.code))&&(o.undefined(a.codeDescription)||o.string((t=a.codeDescription)===null||t===void 0?void 0:t.href))&&(o.string(a.source)||o.undefined(a.source))&&(o.undefined(a.relatedInformation)||o.typedArray(a.relatedInformation,ne.is))}e.is=i})($||($={}));var V;(function(e){function n(r,t){for(var a=[],s=2;s<arguments.length;s++)a[s-2]=arguments[s];var u={title:r,command:t};return o.defined(a)&&a.length>0&&(u.arguments=a),u}e.create=n;function i(r){var t=r;return o.defined(t)&&o.string(t.title)&&o.string(t.command)}e.is=i})(V||(V={}));var L;(function(e){function n(a,s){return{range:a,newText:s}}e.replace=n;function i(a,s){return{range:{start:a,end:a},newText:s}}e.insert=i;function r(a){return{range:a,newText:""}}e.del=r;function t(a){var s=a;return o.objectLiteral(s)&&o.string(s.newText)&&_.is(s.range)}e.is=t})(L||(L={}));var x;(function(e){function n(r,t,a){var s={label:r};return t!==void 0&&(s.needsConfirmation=t),a!==void 0&&(s.description=a),s}e.create=n;function i(r){var t=r;return t!==void 0&&o.objectLiteral(t)&&o.string(t.label)&&(o.boolean(t.needsConfirmation)||t.needsConfirmation===void 0)&&(o.string(t.description)||t.description===void 0)}e.is=i})(x||(x={}));var w;(function(e){function n(i){var r=i;return typeof r=="string"}e.is=n})(w||(w={}));var P;(function(e){function n(a,s,u){return{range:a,newText:s,annotationId:u}}e.replace=n;function i(a,s,u){return{range:{start:a,end:a},newText:s,annotationId:u}}e.insert=i;function r(a,s){return{range:a,newText:"",annotationId:s}}e.del=r;function t(a){var s=a;return L.is(s)&&(x.is(s.annotationId)||w.is(s.annotationId))}e.is=t})(P||(P={}));var G;(function(e){function n(r,t){return{textDocument:r,edits:t}}e.create=n;function i(r){var t=r;return o.defined(t)&&Q.is(t.textDocument)&&Array.isArray(t.edits)}e.is=i})(G||(G={}));var H;(function(e){function n(r,t,a){var s={kind:"create",uri:r};return t!==void 0&&(t.overwrite!==void 0||t.ignoreIfExists!==void 0)&&(s.options=t),a!==void 0&&(s.annotationId=a),s}e.create=n;function i(r){var t=r;return t&&t.kind==="create"&&o.string(t.uri)&&(t.options===void 0||(t.options.overwrite===void 0||o.boolean(t.options.overwrite))&&(t.options.ignoreIfExists===void 0||o.boolean(t.options.ignoreIfExists)))&&(t.annotationId===void 0||w.is(t.annotationId))}e.is=i})(H||(H={}));var z;(function(e){function n(r,t,a,s){var u={kind:"rename",oldUri:r,newUri:t};return a!==void 0&&(a.overwrite!==void 0||a.ignoreIfExists!==void 0)&&(u.options=a),s!==void 0&&(u.annotationId=s),u}e.create=n;function i(r){var t=r;return t&&t.kind==="rename"&&o.string(t.oldUri)&&o.string(t.newUri)&&(t.options===void 0||(t.options.overwrite===void 0||o.boolean(t.options.overwrite))&&(t.options.ignoreIfExists===void 0||o.boolean(t.options.ignoreIfExists)))&&(t.annotationId===void 0||w.is(t.annotationId))}e.is=i})(z||(z={}));var B;(function(e){function n(r,t,a){var s={kind:"delete",uri:r};return t!==void 0&&(t.recursive!==void 0||t.ignoreIfNotExists!==void 0)&&(s.options=t),a!==void 0&&(s.annotationId=a),s}e.create=n;function i(r){var t=r;return t&&t.kind==="delete"&&o.string(t.uri)&&(t.options===void 0||(t.options.recursive===void 0||o.boolean(t.options.recursive))&&(t.options.ignoreIfNotExists===void 0||o.boolean(t.options.ignoreIfNotExists)))&&(t.annotationId===void 0||w.is(t.annotationId))}e.is=i})(B||(B={}));var ie;(function(e){function n(i){var r=i;return r&&(r.changes!==void 0||r.documentChanges!==void 0)&&(r.documentChanges===void 0||r.documentChanges.every(function(t){return o.string(t.kind)?H.is(t)||z.is(t)||B.is(t):G.is(t)}))}e.is=n})(ie||(ie={}));var J=function(){function e(n,i){this.edits=n,this.changeAnnotations=i}return e.prototype.insert=function(n,i,r){var t,a;if(r===void 0?t=L.insert(n,i):w.is(r)?(a=r,t=P.insert(n,i,r)):(this.assertChangeAnnotations(this.changeAnnotations),a=this.changeAnnotations.manage(r),t=P.insert(n,i,a)),this.edits.push(t),a!==void 0)return a},e.prototype.replace=function(n,i,r){var t,a;if(r===void 0?t=L.replace(n,i):w.is(r)?(a=r,t=P.replace(n,i,r)):(this.assertChangeAnnotations(this.changeAnnotations),a=this.changeAnnotations.manage(r),t=P.replace(n,i,a)),this.edits.push(t),a!==void 0)return a},e.prototype.delete=function(n,i){var r,t;if(i===void 0?r=L.del(n):w.is(i)?(t=i,r=P.del(n,i)):(this.assertChangeAnnotations(this.changeAnnotations),t=this.changeAnnotations.manage(i),r=P.del(n,t)),this.edits.push(r),t!==void 0)return t},e.prototype.add=function(n){this.edits.push(n)},e.prototype.all=function(){return this.edits},e.prototype.clear=function(){this.edits.splice(0,this.edits.length)},e.prototype.assertChangeAnnotations=function(n){if(n===void 0)throw new Error("Text edit change is not configured to manage change annotations.")},e}(),ve=function(){function e(n){this._annotations=n===void 0?Object.create(null):n,this._counter=0,this._size=0}return e.prototype.all=function(){return this._annotations},Object.defineProperty(e.prototype,"size",{get:function(){return this._size},enumerable:!1,configurable:!0}),e.prototype.manage=function(n,i){var r;if(w.is(n)?r=n:(r=this.nextId(),i=n),this._annotations[r]!==void 0)throw new Error("Id "+r+" is already in use.");if(i===void 0)throw new Error("No annotation provided for id "+r);return this._annotations[r]=i,this._size++,r},e.prototype.nextId=function(){return this._counter++,this._counter.toString()},e}();(function(){function e(n){var i=this;this._textEditChanges=Object.create(null),n!==void 0?(this._workspaceEdit=n,n.documentChanges?(this._changeAnnotations=new ve(n.changeAnnotations),n.changeAnnotations=this._changeAnnotations.all(),n.documentChanges.forEach(function(r){if(G.is(r)){var t=new J(r.edits,i._changeAnnotations);i._textEditChanges[r.textDocument.uri]=t}})):n.changes&&Object.keys(n.changes).forEach(function(r){var t=new J(n.changes[r]);i._textEditChanges[r]=t})):this._workspaceEdit={}}return Object.defineProperty(e.prototype,"edit",{get:function(){return this.initDocumentChanges(),this._changeAnnotations!==void 0&&(this._changeAnnotations.size===0?this._workspaceEdit.changeAnnotations=void 0:this._workspaceEdit.changeAnnotations=this._changeAnnotations.all()),this._workspaceEdit},enumerable:!1,configurable:!0}),e.prototype.getTextEditChange=function(n){if(Q.is(n)){if(this.initDocumentChanges(),this._workspaceEdit.documentChanges===void 0)throw new Error("Workspace edit is not configured for document changes.");var i={uri:n.uri,version:n.version},r=this._textEditChanges[i.uri];if(!r){var t=[],a={textDocument:i,edits:t};this._workspaceEdit.documentChanges.push(a),r=new J(t,this._changeAnnotations),this._textEditChanges[i.uri]=r}return r}else{if(this.initChanges(),this._workspaceEdit.changes===void 0)throw new Error("Workspace edit is not configured for normal text edit changes.");var r=this._textEditChanges[n];if(!r){var t=[];this._workspaceEdit.changes[n]=t,r=new J(t),this._textEditChanges[n]=r}return r}},e.prototype.initDocumentChanges=function(){this._workspaceEdit.documentChanges===void 0&&this._workspaceEdit.changes===void 0&&(this._changeAnnotations=new ve,this._workspaceEdit.documentChanges=[],this._workspaceEdit.changeAnnotations=this._changeAnnotations.all())},e.prototype.initChanges=function(){this._workspaceEdit.documentChanges===void 0&&this._workspaceEdit.changes===void 0&&(this._workspaceEdit.changes=Object.create(null))},e.prototype.createFile=function(n,i,r){if(this.initDocumentChanges(),this._workspaceEdit.documentChanges===void 0)throw new Error("Workspace edit is not configured for document changes.");var t;x.is(i)||w.is(i)?t=i:r=i;var a,s;if(t===void 0?a=H.create(n,r):(s=w.is(t)?t:this._changeAnnotations.manage(t),a=H.create(n,r,s)),this._workspaceEdit.documentChanges.push(a),s!==void 0)return s},e.prototype.renameFile=function(n,i,r,t){if(this.initDocumentChanges(),this._workspaceEdit.documentChanges===void 0)throw new Error("Workspace edit is not configured for document changes.");var a;x.is(r)||w.is(r)?a=r:t=r;var s,u;if(a===void 0?s=z.create(n,i,t):(u=w.is(a)?a:this._changeAnnotations.manage(a),s=z.create(n,i,t,u)),this._workspaceEdit.documentChanges.push(s),u!==void 0)return u},e.prototype.deleteFile=function(n,i,r){if(this.initDocumentChanges(),this._workspaceEdit.documentChanges===void 0)throw new Error("Workspace edit is not configured for document changes.");var t;x.is(i)||w.is(i)?t=i:r=i;var a,s;if(t===void 0?a=B.create(n,r):(s=w.is(t)?t:this._changeAnnotations.manage(t),a=B.create(n,r,s)),this._workspaceEdit.documentChanges.push(a),s!==void 0)return s},e})();var pe;(function(e){function n(r){return{uri:r}}e.create=n;function i(r){var t=r;return o.defined(t)&&o.string(t.uri)}e.is=i})(pe||(pe={}));var me;(function(e){function n(r,t){return{uri:r,version:t}}e.create=n;function i(r){var t=r;return o.defined(t)&&o.string(t.uri)&&o.integer(t.version)}e.is=i})(me||(me={}));var Q;(function(e){function n(r,t){return{uri:r,version:t}}e.create=n;function i(r){var t=r;return o.defined(t)&&o.string(t.uri)&&(t.version===null||o.integer(t.version))}e.is=i})(Q||(Q={}));var _e;(function(e){function n(r,t,a,s){return{uri:r,languageId:t,version:a,text:s}}e.create=n;function i(r){var t=r;return o.defined(t)&&o.string(t.uri)&&o.string(t.languageId)&&o.integer(t.version)&&o.string(t.text)}e.is=i})(_e||(_e={}));var q;(function(e){e.PlainText="plaintext",e.Markdown="markdown"})(q||(q={}));(function(e){function n(i){var r=i;return r===e.PlainText||r===e.Markdown}e.is=n})(q||(q={}));var ae;(function(e){function n(i){var r=i;return o.objectLiteral(i)&&q.is(r.kind)&&o.string(r.value)}e.is=n})(ae||(ae={}));var p;(function(e){e.Text=1,e.Method=2,e.Function=3,e.Constructor=4,e.Field=5,e.Variable=6,e.Class=7,e.Interface=8,e.Module=9,e.Property=10,e.Unit=11,e.Value=12,e.Enum=13,e.Keyword=14,e.Snippet=15,e.Color=16,e.File=17,e.Reference=18,e.Folder=19,e.EnumMember=20,e.Constant=21,e.Struct=22,e.Event=23,e.Operator=24,e.TypeParameter=25})(p||(p={}));var se;(function(e){e.PlainText=1,e.Snippet=2})(se||(se={}));var ke;(function(e){e.Deprecated=1})(ke||(ke={}));var we;(function(e){function n(r,t,a){return{newText:r,insert:t,replace:a}}e.create=n;function i(r){var t=r;return t&&o.string(t.newText)&&_.is(t.insert)&&_.is(t.replace)}e.is=i})(we||(we={}));var be;(function(e){e.asIs=1,e.adjustIndentation=2})(be||(be={}));var Ce;(function(e){function n(i){return{label:i}}e.create=n})(Ce||(Ce={}));var Ee;(function(e){function n(i,r){return{items:i||[],isIncomplete:!!r}}e.create=n})(Ee||(Ee={}));var Z;(function(e){function n(r){return r.replace(/[\\`*_{}[\]()#+\-.!]/g,"\\$&")}e.fromPlainText=n;function i(r){var t=r;return o.string(t)||o.objectLiteral(t)&&o.string(t.language)&&o.string(t.value)}e.is=i})(Z||(Z={}));var Ae;(function(e){function n(i){var r=i;return!!r&&o.objectLiteral(r)&&(ae.is(r.contents)||Z.is(r.contents)||o.typedArray(r.contents,Z.is))&&(i.range===void 0||_.is(i.range))}e.is=n})(Ae||(Ae={}));var ye;(function(e){function n(i,r){return r?{label:i,documentation:r}:{label:i}}e.create=n})(ye||(ye={}));var Se;(function(e){function n(i,r){for(var t=[],a=2;a<arguments.length;a++)t[a-2]=arguments[a];var s={label:i};return o.defined(r)&&(s.documentation=r),o.defined(t)?s.parameters=t:s.parameters=[],s}e.create=n})(Se||(Se={}));var U;(function(e){e.Text=1,e.Read=2,e.Write=3})(U||(U={}));var Ie;(function(e){function n(i,r){var t={range:i};return o.number(r)&&(t.kind=r),t}e.create=n})(Ie||(Ie={}));var m;(function(e){e.File=1,e.Module=2,e.Namespace=3,e.Package=4,e.Class=5,e.Method=6,e.Property=7,e.Field=8,e.Constructor=9,e.Enum=10,e.Interface=11,e.Function=12,e.Variable=13,e.Constant=14,e.String=15,e.Number=16,e.Boolean=17,e.Array=18,e.Object=19,e.Key=20,e.Null=21,e.EnumMember=22,e.Struct=23,e.Event=24,e.Operator=25,e.TypeParameter=26})(m||(m={}));var Te;(function(e){e.Deprecated=1})(Te||(Te={}));var Pe;(function(e){function n(i,r,t,a,s){var u={name:i,kind:r,location:{uri:a,range:t}};return s&&(u.containerName=s),u}e.create=n})(Pe||(Pe={}));var Le;(function(e){function n(r,t,a,s,u,c){var d={name:r,detail:t,kind:a,range:s,selectionRange:u};return c!==void 0&&(d.children=c),d}e.create=n;function i(r){var t=r;return t&&o.string(t.name)&&o.number(t.kind)&&_.is(t.range)&&_.is(t.selectionRange)&&(t.detail===void 0||o.string(t.detail))&&(t.deprecated===void 0||o.boolean(t.deprecated))&&(t.children===void 0||Array.isArray(t.children))&&(t.tags===void 0||Array.isArray(t.tags))}e.is=i})(Le||(Le={}));var Me;(function(e){e.Empty="",e.QuickFix="quickfix",e.Refactor="refactor",e.RefactorExtract="refactor.extract",e.RefactorInline="refactor.inline",e.RefactorRewrite="refactor.rewrite",e.Source="source",e.SourceOrganizeImports="source.organizeImports",e.SourceFixAll="source.fixAll"})(Me||(Me={}));var Re;(function(e){function n(r,t){var a={diagnostics:r};return t!=null&&(a.only=t),a}e.create=n;function i(r){var t=r;return o.defined(t)&&o.typedArray(t.diagnostics,$.is)&&(t.only===void 0||o.typedArray(t.only,o.string))}e.is=i})(Re||(Re={}));var De;(function(e){function n(r,t,a){var s={title:r},u=!0;return typeof t=="string"?(u=!1,s.kind=t):V.is(t)?s.command=t:s.edit=t,u&&a!==void 0&&(s.kind=a),s}e.create=n;function i(r){var t=r;return t&&o.string(t.title)&&(t.diagnostics===void 0||o.typedArray(t.diagnostics,$.is))&&(t.kind===void 0||o.string(t.kind))&&(t.edit!==void 0||t.command!==void 0)&&(t.command===void 0||V.is(t.command))&&(t.isPreferred===void 0||o.boolean(t.isPreferred))&&(t.edit===void 0||ie.is(t.edit))}e.is=i})(De||(De={}));var Ne;(function(e){function n(r,t){var a={range:r};return o.defined(t)&&(a.data=t),a}e.create=n;function i(r){var t=r;return o.defined(t)&&_.is(t.range)&&(o.undefined(t.command)||V.is(t.command))}e.is=i})(Ne||(Ne={}));var Oe;(function(e){function n(r,t){return{tabSize:r,insertSpaces:t}}e.create=n;function i(r){var t=r;return o.defined(t)&&o.uinteger(t.tabSize)&&o.boolean(t.insertSpaces)}e.is=i})(Oe||(Oe={}));var xe;(function(e){function n(r,t,a){return{range:r,target:t,data:a}}e.create=n;function i(r){var t=r;return o.defined(t)&&_.is(t.range)&&(o.undefined(t.target)||o.string(t.target))}e.is=i})(xe||(xe={}));var je;(function(e){function n(r,t){return{range:r,parent:t}}e.create=n;function i(r){var t=r;return t!==void 0&&_.is(t.range)&&(t.parent===void 0||e.is(t.parent))}e.is=i})(je||(je={}));var Fe;(function(e){function n(a,s,u,c){return new st(a,s,u,c)}e.create=n;function i(a){var s=a;return!!(o.defined(s)&&o.string(s.uri)&&(o.undefined(s.languageId)||o.string(s.languageId))&&o.uinteger(s.lineCount)&&o.func(s.getText)&&o.func(s.positionAt)&&o.func(s.offsetAt))}e.is=i;function r(a,s){for(var u=a.getText(),c=t(s,function(I,R){var j=I.range.start.line-R.range.start.line;return j===0?I.range.start.character-R.range.start.character:j}),d=u.length,v=c.length-1;v>=0;v--){var g=c[v],b=a.offsetAt(g.range.start),h=a.offsetAt(g.range.end);if(h<=d)u=u.substring(0,b)+g.newText+u.substring(h,u.length);else throw new Error("Overlapping edit");d=b}return u}e.applyEdits=r;function t(a,s){if(a.length<=1)return a;var u=a.length/2|0,c=a.slice(0,u),d=a.slice(u);t(c,s),t(d,s);for(var v=0,g=0,b=0;v<c.length&&g<d.length;){var h=s(c[v],d[g]);h<=0?a[b++]=c[v++]:a[b++]=d[g++]}for(;v<c.length;)a[b++]=c[v++];for(;g<d.length;)a[b++]=d[g++];return a}})(Fe||(Fe={}));var st=function(){function e(n,i,r,t){this._uri=n,this._languageId=i,this._version=r,this._content=t,this._lineOffsets=void 0}return Object.defineProperty(e.prototype,"uri",{get:function(){return this._uri},enumerable:!1,configurable:!0}),Object.defineProperty(e.prototype,"languageId",{get:function(){return this._languageId},enumerable:!1,configurable:!0}),Object.defineProperty(e.prototype,"version",{get:function(){return this._version},enumerable:!1,configurable:!0}),e.prototype.getText=function(n){if(n){var i=this.offsetAt(n.start),r=this.offsetAt(n.end);return this._content.substring(i,r)}return this._content},e.prototype.update=function(n,i){this._content=n.text,this._version=i,this._lineOffsets=void 0},e.prototype.getLineOffsets=function(){if(this._lineOffsets===void 0){for(var n=[],i=this._content,r=!0,t=0;t<i.length;t++){r&&(n.push(t),r=!1);var a=i.charAt(t);r=a==="\r"||a===`
-`,a==="\r"&&t+1<i.length&&i.charAt(t+1)===`
-`&&t++}r&&i.length>0&&n.push(i.length),this._lineOffsets=n}return this._lineOffsets},e.prototype.positionAt=function(n){n=Math.max(Math.min(n,this._content.length),0);var i=this.getLineOffsets(),r=0,t=i.length;if(t===0)return T.create(0,n);for(;r<t;){var a=Math.floor((r+t)/2);i[a]>n?t=a:r=a+1}var s=r-1;return T.create(s,n-i[s])},e.prototype.offsetAt=function(n){var i=this.getLineOffsets();if(n.line>=i.length)return this._content.length;if(n.line<0)return 0;var r=i[n.line],t=n.line+1<i.length?i[n.line+1]:this._content.length;return Math.max(Math.min(r+n.character,t),r)},Object.defineProperty(e.prototype,"lineCount",{get:function(){return this.getLineOffsets().length},enumerable:!1,configurable:!0}),e}(),o;(function(e){var n=Object.prototype.toString;function i(h){return typeof h<"u"}e.defined=i;function r(h){return typeof h>"u"}e.undefined=r;function t(h){return h===!0||h===!1}e.boolean=t;function a(h){return n.call(h)==="[object String]"}e.string=a;function s(h){return n.call(h)==="[object Number]"}e.number=s;function u(h,I,R){return n.call(h)==="[object Number]"&&I<=h&&h<=R}e.numberRange=u;function c(h){return n.call(h)==="[object Number]"&&-2147483648<=h&&h<=2147483647}e.integer=c;function d(h){return n.call(h)==="[object Number]"&&0<=h&&h<=2147483647}e.uinteger=d;function v(h){return n.call(h)==="[object Function]"}e.func=v;function g(h){return h!==null&&typeof h=="object"}e.objectLiteral=g;function b(h,I){return Array.isArray(h)&&h.every(I)}e.typedArray=b})(o||(o={}));var ot=class{constructor(e,n,i){A(this,"_disposables",[]);A(this,"_listener",Object.create(null));this._languageId=e,this._worker=n;const r=a=>{let s=a.getLanguageId();if(s!==this._languageId)return;let u;this._listener[a.uri.toString()]=a.onDidChangeContent(()=>{window.clearTimeout(u),u=window.setTimeout(()=>this._doValidate(a.uri,s),500)}),this._doValidate(a.uri,s)},t=a=>{l.editor.setModelMarkers(a,this._languageId,[]);let s=a.uri.toString(),u=this._listener[s];u&&(u.dispose(),delete this._listener[s])};this._disposables.push(l.editor.onDidCreateModel(r)),this._disposables.push(l.editor.onWillDisposeModel(t)),this._disposables.push(l.editor.onDidChangeModelLanguage(a=>{t(a.model),r(a.model)})),this._disposables.push(i(a=>{l.editor.getModels().forEach(s=>{s.getLanguageId()===this._languageId&&(t(s),r(s))})})),this._disposables.push({dispose:()=>{l.editor.getModels().forEach(t);for(let a in this._listener)this._listener[a].dispose()}}),l.editor.getModels().forEach(r)}dispose(){this._disposables.forEach(e=>e&&e.dispose()),this._disposables.length=0}_doValidate(e,n){this._worker(e).then(i=>i.doValidation(e.toString())).then(i=>{const r=i.map(a=>ct(e,a));let t=l.editor.getModel(e);t&&t.getLanguageId()===n&&l.editor.setModelMarkers(t,n,r)}).then(void 0,i=>{console.error(i)})}};function ut(e){switch(e){case N.Error:return l.MarkerSeverity.Error;case N.Warning:return l.MarkerSeverity.Warning;case N.Information:return l.MarkerSeverity.Info;case N.Hint:return l.MarkerSeverity.Hint;default:return l.MarkerSeverity.Info}}function ct(e,n){let i=typeof n.code=="number"?String(n.code):n.code;return{severity:ut(n.severity),startLineNumber:n.range.start.line+1,startColumn:n.range.start.character+1,endLineNumber:n.range.end.line+1,endColumn:n.range.end.character+1,message:n.message,code:i,source:n.source}}var dt=class{constructor(e,n){this._worker=e,this._triggerCharacters=n}get triggerCharacters(){return this._triggerCharacters}provideCompletionItems(e,n,i,r){const t=e.uri;return this._worker(t).then(a=>a.doComplete(t.toString(),M(n))).then(a=>{if(!a)return;const s=e.getWordUntilPosition(n),u=new l.Range(n.lineNumber,s.startColumn,n.lineNumber,s.endColumn),c=a.items.map(d=>{const v={label:d.label,insertText:d.insertText||d.label,sortText:d.sortText,filterText:d.filterText,documentation:d.documentation,detail:d.detail,command:gt(d.command),range:u,kind:lt(d.kind)};return d.textEdit&&(ft(d.textEdit)?v.range={insert:y(d.textEdit.insert),replace:y(d.textEdit.replace)}:v.range=y(d.textEdit.range),v.insertText=d.textEdit.newText),d.additionalTextEdits&&(v.additionalTextEdits=d.additionalTextEdits.map(X)),d.insertTextFormat===se.Snippet&&(v.insertTextRules=l.languages.CompletionItemInsertTextRule.InsertAsSnippet),v});return{isIncomplete:a.isIncomplete,suggestions:c}})}};function M(e){if(!!e)return{character:e.column-1,line:e.lineNumber-1}}function Be(e){if(!!e)return{start:{line:e.startLineNumber-1,character:e.startColumn-1},end:{line:e.endLineNumber-1,character:e.endColumn-1}}}function y(e){if(!!e)return new l.Range(e.start.line+1,e.start.character+1,e.end.line+1,e.end.character+1)}function ft(e){return typeof e.insert<"u"&&typeof e.replace<"u"}function lt(e){const n=l.languages.CompletionItemKind;switch(e){case p.Text:return n.Text;case p.Method:return n.Method;case p.Function:return n.Function;case p.Constructor:return n.Constructor;case p.Field:return n.Field;case p.Variable:return n.Variable;case p.Class:return n.Class;case p.Interface:return n.Interface;case p.Module:return n.Module;case p.Property:return n.Property;case p.Unit:return n.Unit;case p.Value:return n.Value;case p.Enum:return n.Enum;case p.Keyword:return n.Keyword;case p.Snippet:return n.Snippet;case p.Color:return n.Color;case p.File:return n.File;case p.Reference:return n.Reference}return n.Property}function X(e){if(!!e)return{range:y(e.range),text:e.newText}}function gt(e){return e&&e.command==="editor.action.triggerSuggest"?{id:e.command,title:e.title,arguments:e.arguments}:void 0}var ht=class{constructor(e){this._worker=e}provideHover(e,n,i){let r=e.uri;return this._worker(r).then(t=>t.doHover(r.toString(),M(n))).then(t=>{if(!!t)return{range:y(t.range),contents:pt(t.contents)}})}};function vt(e){return e&&typeof e=="object"&&typeof e.kind=="string"}function We(e){return typeof e=="string"?{value:e}:vt(e)?e.kind==="plaintext"?{value:e.value.replace(/[\\`*_{}[\]()#+\-.!]/g,"\\$&")}:{value:e.value}:{value:"```"+e.language+`
-`+e.value+"\n```\n"}}function pt(e){if(!!e)return Array.isArray(e)?e.map(We):[We(e)]}var Bt=class{constructor(e){this._worker=e}provideDocumentHighlights(e,n,i){const r=e.uri;return this._worker(r).then(t=>t.findDocumentHighlights(r.toString(),M(n))).then(t=>{if(!!t)return t.map(a=>({range:y(a.range),kind:mt(a.kind)}))})}};function mt(e){switch(e){case U.Read:return l.languages.DocumentHighlightKind.Read;case U.Write:return l.languages.DocumentHighlightKind.Write;case U.Text:return l.languages.DocumentHighlightKind.Text}return l.languages.DocumentHighlightKind.Text}var qt=class{constructor(e){this._worker=e}provideDefinition(e,n,i){const r=e.uri;return this._worker(r).then(t=>t.findDefinition(r.toString(),M(n))).then(t=>{if(!!t)return[qe(t)]})}};function qe(e){return{uri:l.Uri.parse(e.uri),range:y(e.range)}}var Xt=class{constructor(e){this._worker=e}provideReferences(e,n,i,r){const t=e.uri;return this._worker(t).then(a=>a.findReferences(t.toString(),M(n))).then(a=>{if(!!a)return a.map(qe)})}},Jt=class{constructor(e){this._worker=e}provideRenameEdits(e,n,i,r){const t=e.uri;return this._worker(t).then(a=>a.doRename(t.toString(),M(n),i)).then(a=>_t(a))}};function _t(e){if(!e||!e.changes)return;let n=[];for(let i in e.changes){const r=l.Uri.parse(i);for(let t of e.changes[i])n.push({resource:r,versionId:void 0,textEdit:{range:y(t.range),text:t.newText}})}return{edits:n}}var kt=class{constructor(e){this._worker=e}provideDocumentSymbols(e,n){const i=e.uri;return this._worker(i).then(r=>r.findDocumentSymbols(i.toString())).then(r=>{if(!!r)return r.map(t=>({name:t.name,detail:"",containerName:t.containerName,kind:wt(t.kind),range:y(t.location.range),selectionRange:y(t.location.range),tags:[]}))})}};function wt(e){let n=l.languages.SymbolKind;switch(e){case m.File:return n.Array;case m.Module:return n.Module;case m.Namespace:return n.Namespace;case m.Package:return n.Package;case m.Class:return n.Class;case m.Method:return n.Method;case m.Property:return n.Property;case m.Field:return n.Field;case m.Constructor:return n.Constructor;case m.Enum:return n.Enum;case m.Interface:return n.Interface;case m.Function:return n.Function;case m.Variable:return n.Variable;case m.Constant:return n.Constant;case m.String:return n.String;case m.Number:return n.Number;case m.Boolean:return n.Boolean;case m.Array:return n.Array}return n.Function}var Yt=class{constructor(e){this._worker=e}provideLinks(e,n){const i=e.uri;return this._worker(i).then(r=>r.findDocumentLinks(i.toString())).then(r=>{if(!!r)return{links:r.map(t=>({range:y(t.range),url:t.target}))}})}},bt=class{constructor(e){this._worker=e}provideDocumentFormattingEdits(e,n,i){const r=e.uri;return this._worker(r).then(t=>t.format(r.toString(),null,Xe(n)).then(a=>{if(!(!a||a.length===0))return a.map(X)}))}},Ct=class{constructor(e){this._worker=e}provideDocumentRangeFormattingEdits(e,n,i,r){const t=e.uri;return this._worker(t).then(a=>a.format(t.toString(),Be(n),Xe(i)).then(s=>{if(!(!s||s.length===0))return s.map(X)}))}};function Xe(e){return{tabSize:e.tabSize,insertSpaces:e.insertSpaces}}var Et=class{constructor(e){this._worker=e}provideDocumentColors(e,n){const i=e.uri;return this._worker(i).then(r=>r.findDocumentColors(i.toString())).then(r=>{if(!!r)return r.map(t=>({color:t.color,range:y(t.range)}))})}provideColorPresentations(e,n,i){const r=e.uri;return this._worker(r).then(t=>t.getColorPresentations(r.toString(),n.color,Be(n.range))).then(t=>{if(!!t)return t.map(a=>{let s={label:a.label};return a.textEdit&&(s.textEdit=X(a.textEdit)),a.additionalTextEdits&&(s.additionalTextEdits=a.additionalTextEdits.map(X)),s})})}},At=class{constructor(e){this._worker=e}provideFoldingRanges(e,n,i){const r=e.uri;return this._worker(r).then(t=>t.getFoldingRanges(r.toString(),n)).then(t=>{if(!!t)return t.map(a=>{const s={start:a.startLine+1,end:a.endLine+1};return typeof a.kind<"u"&&(s.kind=yt(a.kind)),s})})}};function yt(e){switch(e){case W.Comment:return l.languages.FoldingRangeKind.Comment;case W.Imports:return l.languages.FoldingRangeKind.Imports;case W.Region:return l.languages.FoldingRangeKind.Region}}var St=class{constructor(e){this._worker=e}provideSelectionRanges(e,n,i){const r=e.uri;return this._worker(r).then(t=>t.getSelectionRanges(r.toString(),n.map(M))).then(t=>{if(!!t)return t.map(a=>{const s=[];for(;a;)s.push({range:y(a.range)}),a=a.parent;return s})})}};function It(e,n){n===void 0&&(n=!1);var i=e.length,r=0,t="",a=0,s=16,u=0,c=0,d=0,v=0,g=0;function b(f,C){for(var S=0,E=0;S<f||!C;){var k=e.charCodeAt(r);if(k>=48&&k<=57)E=E*16+k-48;else if(k>=65&&k<=70)E=E*16+k-65+10;else if(k>=97&&k<=102)E=E*16+k-97+10;else break;r++,S++}return S<f&&(E=-1),E}function h(f){r=f,t="",a=0,s=16,g=0}function I(){var f=r;if(e.charCodeAt(r)===48)r++;else for(r++;r<e.length&&D(e.charCodeAt(r));)r++;if(r<e.length&&e.charCodeAt(r)===46)if(r++,r<e.length&&D(e.charCodeAt(r)))for(r++;r<e.length&&D(e.charCodeAt(r));)r++;else return g=3,e.substring(f,r);var C=r;if(r<e.length&&(e.charCodeAt(r)===69||e.charCodeAt(r)===101))if(r++,(r<e.length&&e.charCodeAt(r)===43||e.charCodeAt(r)===45)&&r++,r<e.length&&D(e.charCodeAt(r))){for(r++;r<e.length&&D(e.charCodeAt(r));)r++;C=r}else g=3;return e.substring(f,C)}function R(){for(var f="",C=r;;){if(r>=i){f+=e.substring(C,r),g=2;break}var S=e.charCodeAt(r);if(S===34){f+=e.substring(C,r),r++;break}if(S===92){if(f+=e.substring(C,r),r++,r>=i){g=2;break}var E=e.charCodeAt(r++);switch(E){case 34:f+='"';break;case 92:f+="\\";break;case 47:f+="/";break;case 98:f+="\b";break;case 102:f+="\f";break;case 110:f+=`
-`;break;case 114:f+="\r";break;case 116:f+="	";break;case 117:var k=b(4,!0);k>=0?f+=String.fromCharCode(k):g=4;break;default:g=5}C=r;continue}if(S>=0&&S<=31)if(F(S)){f+=e.substring(C,r),g=2;break}else g=6;r++}return f}function j(){if(t="",g=0,a=r,c=u,v=d,r>=i)return a=i,s=17;var f=e.charCodeAt(r);if(ee(f)){do r++,t+=String.fromCharCode(f),f=e.charCodeAt(r);while(ee(f));return s=15}if(F(f))return r++,t+=String.fromCharCode(f),f===13&&e.charCodeAt(r)===10&&(r++,t+=`
-`),u++,d=r,s=14;switch(f){case 123:return r++,s=1;case 125:return r++,s=2;case 91:return r++,s=3;case 93:return r++,s=4;case 58:return r++,s=6;case 44:return r++,s=5;case 34:return r++,t=R(),s=10;case 47:var C=r-1;if(e.charCodeAt(r+1)===47){for(r+=2;r<i&&!F(e.charCodeAt(r));)r++;return t=e.substring(C,r),s=12}if(e.charCodeAt(r+1)===42){r+=2;for(var S=i-1,E=!1;r<S;){var k=e.charCodeAt(r);if(k===42&&e.charCodeAt(r+1)===47){r+=2,E=!0;break}r++,F(k)&&(k===13&&e.charCodeAt(r)===10&&r++,u++,d=r)}return E||(r++,g=1),t=e.substring(C,r),s=13}return t+=String.fromCharCode(f),r++,s=16;case 45:if(t+=String.fromCharCode(f),r++,r===i||!D(e.charCodeAt(r)))return s=16;case 48:case 49:case 50:case 51:case 52:case 53:case 54:case 55:case 56:case 57:return t+=I(),s=11;default:for(;r<i&&Ye(f);)r++,f=e.charCodeAt(r);if(a!==r){switch(t=e.substring(a,r),t){case"true":return s=8;case"false":return s=9;case"null":return s=7}return s=16}return t+=String.fromCharCode(f),r++,s=16}}function Ye(f){if(ee(f)||F(f))return!1;switch(f){case 125:case 93:case 123:case 91:case 34:case 58:case 44:case 47:return!1}return!0}function $e(){var f;do f=j();while(f>=12&&f<=15);return f}return{setPosition:h,getPosition:function(){return r},scan:n?$e:j,getToken:function(){return s},getTokenValue:function(){return t},getTokenOffset:function(){return a},getTokenLength:function(){return r-a},getTokenStartLine:function(){return c},getTokenStartCharacter:function(){return a-v},getTokenError:function(){return g}}}function ee(e){return e===32||e===9||e===11||e===12||e===160||e===5760||e>=8192&&e<=8203||e===8239||e===8287||e===12288||e===65279}function F(e){return e===10||e===13||e===8232||e===8233}function D(e){return e>=48&&e<=57}var Ue;(function(e){e.DEFAULT={allowTrailingComma:!1}})(Ue||(Ue={}));var Tt=It;function Pt(e){return{getInitialState:()=>new K(null,null,!1,null),tokenize:(n,i)=>Wt(e,n,i)}}var Ve="delimiter.bracket.json",He="delimiter.array.json",Lt="delimiter.colon.json",Mt="delimiter.comma.json",Rt="keyword.json",Dt="keyword.json",Nt="string.value.json",Ot="number.json",xt="string.key.json",jt="comment.block.json",Ft="comment.line.json",O=class{constructor(e,n){this.parent=e,this.type=n}static pop(e){return e?e.parent:null}static push(e,n){return new O(e,n)}static equals(e,n){if(!e&&!n)return!0;if(!e||!n)return!1;for(;e&&n;){if(e===n)return!0;if(e.type!==n.type)return!1;e=e.parent,n=n.parent}return!0}},K=class{constructor(e,n,i,r){A(this,"_state");A(this,"scanError");A(this,"lastWasColon");A(this,"parents");this._state=e,this.scanError=n,this.lastWasColon=i,this.parents=r}clone(){return new K(this._state,this.scanError,this.lastWasColon,this.parents)}equals(e){return e===this?!0:!e||!(e instanceof K)?!1:this.scanError===e.scanError&&this.lastWasColon===e.lastWasColon&&O.equals(this.parents,e.parents)}getStateData(){return this._state}setStateData(e){this._state=e}};function Wt(e,n,i,r=0){let t=0,a=!1;switch(i.scanError){case 2:n='"'+n,t=1;break;case 1:n="/*"+n,t=2;break}const s=Tt(n);let u=i.lastWasColon,c=i.parents;const d={tokens:[],endState:i.clone()};for(;;){let v=r+s.getPosition(),g="";const b=s.scan();if(b===17)break;if(v===r+s.getPosition())throw new Error("Scanner did not advance, next 3 characters are: "+n.substr(s.getPosition(),3));switch(a&&(v-=t),a=t>0,b){case 1:c=O.push(c,0),g=Ve,u=!1;break;case 2:c=O.pop(c),g=Ve,u=!1;break;case 3:c=O.push(c,1),g=He,u=!1;break;case 4:c=O.pop(c),g=He,u=!1;break;case 6:g=Lt,u=!0;break;case 5:g=Mt,u=!1;break;case 8:case 9:g=Rt,u=!1;break;case 7:g=Dt,u=!1;break;case 10:const I=(c?c.type:0)===1;g=u||I?Nt:xt,u=!1;break;case 11:g=Ot,u=!1;break}if(e)switch(b){case 12:g=Ft;break;case 13:g=jt;break}d.endState=new K(i.getStateData(),s.getTokenError(),u,c),d.tokens.push({startIndex:v,scopes:g})}return d}var Ut=class extends ot{constructor(e,n,i){super(e,n,i.onDidChange),this._disposables.push(l.editor.onWillDisposeModel(r=>{this._resetSchema(r.uri)})),this._disposables.push(l.editor.onDidChangeModelLanguage(r=>{this._resetSchema(r.model.uri)}))}_resetSchema(e){this._worker().then(n=>{n.resetSchema(e.toString())})}};function $t(e){const n=[],i=[],r=new at(e);n.push(r);const t=(...u)=>r.getLanguageServiceWorker(...u);function a(){const{languageId:u,modeConfiguration:c}=e;Je(i),c.documentFormattingEdits&&i.push(l.languages.registerDocumentFormattingEditProvider(u,new bt(t))),c.documentRangeFormattingEdits&&i.push(l.languages.registerDocumentRangeFormattingEditProvider(u,new Ct(t))),c.completionItems&&i.push(l.languages.registerCompletionItemProvider(u,new dt(t,[" ",":",'"']))),c.hovers&&i.push(l.languages.registerHoverProvider(u,new ht(t))),c.documentSymbols&&i.push(l.languages.registerDocumentSymbolProvider(u,new kt(t))),c.tokens&&i.push(l.languages.setTokensProvider(u,Pt(!0))),c.colors&&i.push(l.languages.registerColorProvider(u,new Et(t))),c.foldingRanges&&i.push(l.languages.registerFoldingRangeProvider(u,new At(t))),c.diagnostics&&i.push(new Ut(u,t,e)),c.selectionRanges&&i.push(l.languages.registerSelectionRangeProvider(u,new St(t)))}a(),n.push(l.languages.setLanguageConfiguration(e.languageId,Vt));let s=e.modeConfiguration;return e.onDidChange(u=>{u.modeConfiguration!==s&&(s=u.modeConfiguration,a())}),n.push(ze(i)),ze(n)}function ze(e){return{dispose:()=>Je(e)}}function Je(e){for(;e.length;)e.pop().dispose()}var Vt={wordPattern:/(-?\d*\.\d\w*)|([^\[\{\]\}\:\"\,\s]+)/g,comments:{lineComment:"//",blockComment:["/*","*/"]},brackets:[["{","}"],["[","]"]],autoClosingPairs:[{open:"{",close:"}",notIn:["string"]},{open:"[",close:"]",notIn:["string"]},{open:'"',close:'"',notIn:["string"]}]};export{dt as CompletionAdapter,qt as DefinitionAdapter,ot as DiagnosticsAdapter,Et as DocumentColorAdapter,bt as DocumentFormattingEditProvider,Bt as DocumentHighlightAdapter,Yt as DocumentLinkAdapter,Ct as DocumentRangeFormattingEditProvider,kt as DocumentSymbolAdapter,At as FoldingRangeAdapter,ht as HoverAdapter,Xt as ReferenceAdapter,Jt as RenameAdapter,St as SelectionRangeAdapter,at as WorkerManager,M as fromPosition,Be as fromRange,$t as setupMode,y as toRange,X as toTextEdit};
+ *-----------------------------------------------------------------------------*/
+var __defProp2 = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp2(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+var monaco_editor_core_exports = {};
+__reExport(monaco_editor_core_exports, monaco_editor_core_star);
+var STOP_WHEN_IDLE_FOR = 2 * 60 * 1e3;
+var WorkerManager = class {
+  constructor(defaults) {
+    __publicField(this, "_defaults");
+    __publicField(this, "_idleCheckInterval");
+    __publicField(this, "_lastUsedTime");
+    __publicField(this, "_configChangeListener");
+    __publicField(this, "_worker");
+    __publicField(this, "_client");
+    this._defaults = defaults;
+    this._worker = null;
+    this._client = null;
+    this._idleCheckInterval = window.setInterval(() => this._checkIfIdle(), 30 * 1e3);
+    this._lastUsedTime = 0;
+    this._configChangeListener = this._defaults.onDidChange(() => this._stopWorker());
+  }
+  _stopWorker() {
+    if (this._worker) {
+      this._worker.dispose();
+      this._worker = null;
+    }
+    this._client = null;
+  }
+  dispose() {
+    clearInterval(this._idleCheckInterval);
+    this._configChangeListener.dispose();
+    this._stopWorker();
+  }
+  _checkIfIdle() {
+    if (!this._worker) {
+      return;
+    }
+    let timePassedSinceLastUsed = Date.now() - this._lastUsedTime;
+    if (timePassedSinceLastUsed > STOP_WHEN_IDLE_FOR) {
+      this._stopWorker();
+    }
+  }
+  _getClient() {
+    this._lastUsedTime = Date.now();
+    if (!this._client) {
+      this._worker = monaco_editor_core_exports.editor.createWebWorker({
+        moduleId: "vs/language/json/jsonWorker",
+        label: this._defaults.languageId,
+        createData: {
+          languageSettings: this._defaults.diagnosticsOptions,
+          languageId: this._defaults.languageId,
+          enableSchemaRequest: this._defaults.diagnosticsOptions.enableSchemaRequest
+        }
+      });
+      this._client = this._worker.getProxy();
+    }
+    return this._client;
+  }
+  getLanguageServiceWorker(...resources) {
+    let _client;
+    return this._getClient().then((client) => {
+      _client = client;
+    }).then((_) => {
+      if (this._worker) {
+        return this._worker.withSyncedResources(resources);
+      }
+    }).then((_) => _client);
+  }
+};
+var integer;
+(function(integer2) {
+  integer2.MIN_VALUE = -2147483648;
+  integer2.MAX_VALUE = 2147483647;
+})(integer || (integer = {}));
+var uinteger;
+(function(uinteger2) {
+  uinteger2.MIN_VALUE = 0;
+  uinteger2.MAX_VALUE = 2147483647;
+})(uinteger || (uinteger = {}));
+var Position;
+(function(Position3) {
+  function create(line, character) {
+    if (line === Number.MAX_VALUE) {
+      line = uinteger.MAX_VALUE;
+    }
+    if (character === Number.MAX_VALUE) {
+      character = uinteger.MAX_VALUE;
+    }
+    return { line, character };
+  }
+  Position3.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.objectLiteral(candidate) && Is.uinteger(candidate.line) && Is.uinteger(candidate.character);
+  }
+  Position3.is = is;
+})(Position || (Position = {}));
+var Range;
+(function(Range3) {
+  function create(one, two, three, four) {
+    if (Is.uinteger(one) && Is.uinteger(two) && Is.uinteger(three) && Is.uinteger(four)) {
+      return { start: Position.create(one, two), end: Position.create(three, four) };
+    } else if (Position.is(one) && Position.is(two)) {
+      return { start: one, end: two };
+    } else {
+      throw new Error("Range#create called with invalid arguments[" + one + ", " + two + ", " + three + ", " + four + "]");
+    }
+  }
+  Range3.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.objectLiteral(candidate) && Position.is(candidate.start) && Position.is(candidate.end);
+  }
+  Range3.is = is;
+})(Range || (Range = {}));
+var Location;
+(function(Location2) {
+  function create(uri, range) {
+    return { uri, range };
+  }
+  Location2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Range.is(candidate.range) && (Is.string(candidate.uri) || Is.undefined(candidate.uri));
+  }
+  Location2.is = is;
+})(Location || (Location = {}));
+var LocationLink;
+(function(LocationLink2) {
+  function create(targetUri, targetRange, targetSelectionRange, originSelectionRange) {
+    return { targetUri, targetRange, targetSelectionRange, originSelectionRange };
+  }
+  LocationLink2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Range.is(candidate.targetRange) && Is.string(candidate.targetUri) && (Range.is(candidate.targetSelectionRange) || Is.undefined(candidate.targetSelectionRange)) && (Range.is(candidate.originSelectionRange) || Is.undefined(candidate.originSelectionRange));
+  }
+  LocationLink2.is = is;
+})(LocationLink || (LocationLink = {}));
+var Color;
+(function(Color2) {
+  function create(red, green, blue, alpha) {
+    return {
+      red,
+      green,
+      blue,
+      alpha
+    };
+  }
+  Color2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.numberRange(candidate.red, 0, 1) && Is.numberRange(candidate.green, 0, 1) && Is.numberRange(candidate.blue, 0, 1) && Is.numberRange(candidate.alpha, 0, 1);
+  }
+  Color2.is = is;
+})(Color || (Color = {}));
+var ColorInformation;
+(function(ColorInformation2) {
+  function create(range, color) {
+    return {
+      range,
+      color
+    };
+  }
+  ColorInformation2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Range.is(candidate.range) && Color.is(candidate.color);
+  }
+  ColorInformation2.is = is;
+})(ColorInformation || (ColorInformation = {}));
+var ColorPresentation;
+(function(ColorPresentation2) {
+  function create(label, textEdit, additionalTextEdits) {
+    return {
+      label,
+      textEdit,
+      additionalTextEdits
+    };
+  }
+  ColorPresentation2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.string(candidate.label) && (Is.undefined(candidate.textEdit) || TextEdit.is(candidate)) && (Is.undefined(candidate.additionalTextEdits) || Is.typedArray(candidate.additionalTextEdits, TextEdit.is));
+  }
+  ColorPresentation2.is = is;
+})(ColorPresentation || (ColorPresentation = {}));
+var FoldingRangeKind;
+(function(FoldingRangeKind2) {
+  FoldingRangeKind2["Comment"] = "comment";
+  FoldingRangeKind2["Imports"] = "imports";
+  FoldingRangeKind2["Region"] = "region";
+})(FoldingRangeKind || (FoldingRangeKind = {}));
+var FoldingRange;
+(function(FoldingRange2) {
+  function create(startLine, endLine, startCharacter, endCharacter, kind) {
+    var result = {
+      startLine,
+      endLine
+    };
+    if (Is.defined(startCharacter)) {
+      result.startCharacter = startCharacter;
+    }
+    if (Is.defined(endCharacter)) {
+      result.endCharacter = endCharacter;
+    }
+    if (Is.defined(kind)) {
+      result.kind = kind;
+    }
+    return result;
+  }
+  FoldingRange2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.uinteger(candidate.startLine) && Is.uinteger(candidate.startLine) && (Is.undefined(candidate.startCharacter) || Is.uinteger(candidate.startCharacter)) && (Is.undefined(candidate.endCharacter) || Is.uinteger(candidate.endCharacter)) && (Is.undefined(candidate.kind) || Is.string(candidate.kind));
+  }
+  FoldingRange2.is = is;
+})(FoldingRange || (FoldingRange = {}));
+var DiagnosticRelatedInformation;
+(function(DiagnosticRelatedInformation2) {
+  function create(location, message) {
+    return {
+      location,
+      message
+    };
+  }
+  DiagnosticRelatedInformation2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Location.is(candidate.location) && Is.string(candidate.message);
+  }
+  DiagnosticRelatedInformation2.is = is;
+})(DiagnosticRelatedInformation || (DiagnosticRelatedInformation = {}));
+var DiagnosticSeverity;
+(function(DiagnosticSeverity2) {
+  DiagnosticSeverity2.Error = 1;
+  DiagnosticSeverity2.Warning = 2;
+  DiagnosticSeverity2.Information = 3;
+  DiagnosticSeverity2.Hint = 4;
+})(DiagnosticSeverity || (DiagnosticSeverity = {}));
+var DiagnosticTag;
+(function(DiagnosticTag2) {
+  DiagnosticTag2.Unnecessary = 1;
+  DiagnosticTag2.Deprecated = 2;
+})(DiagnosticTag || (DiagnosticTag = {}));
+var CodeDescription;
+(function(CodeDescription2) {
+  function is(value) {
+    var candidate = value;
+    return candidate !== void 0 && candidate !== null && Is.string(candidate.href);
+  }
+  CodeDescription2.is = is;
+})(CodeDescription || (CodeDescription = {}));
+var Diagnostic;
+(function(Diagnostic2) {
+  function create(range, message, severity, code, source, relatedInformation) {
+    var result = { range, message };
+    if (Is.defined(severity)) {
+      result.severity = severity;
+    }
+    if (Is.defined(code)) {
+      result.code = code;
+    }
+    if (Is.defined(source)) {
+      result.source = source;
+    }
+    if (Is.defined(relatedInformation)) {
+      result.relatedInformation = relatedInformation;
+    }
+    return result;
+  }
+  Diagnostic2.create = create;
+  function is(value) {
+    var _a;
+    var candidate = value;
+    return Is.defined(candidate) && Range.is(candidate.range) && Is.string(candidate.message) && (Is.number(candidate.severity) || Is.undefined(candidate.severity)) && (Is.integer(candidate.code) || Is.string(candidate.code) || Is.undefined(candidate.code)) && (Is.undefined(candidate.codeDescription) || Is.string((_a = candidate.codeDescription) === null || _a === void 0 ? void 0 : _a.href)) && (Is.string(candidate.source) || Is.undefined(candidate.source)) && (Is.undefined(candidate.relatedInformation) || Is.typedArray(candidate.relatedInformation, DiagnosticRelatedInformation.is));
+  }
+  Diagnostic2.is = is;
+})(Diagnostic || (Diagnostic = {}));
+var Command;
+(function(Command2) {
+  function create(title, command) {
+    var args = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+      args[_i - 2] = arguments[_i];
+    }
+    var result = { title, command };
+    if (Is.defined(args) && args.length > 0) {
+      result.arguments = args;
+    }
+    return result;
+  }
+  Command2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Is.string(candidate.title) && Is.string(candidate.command);
+  }
+  Command2.is = is;
+})(Command || (Command = {}));
+var TextEdit;
+(function(TextEdit2) {
+  function replace(range, newText) {
+    return { range, newText };
+  }
+  TextEdit2.replace = replace;
+  function insert(position, newText) {
+    return { range: { start: position, end: position }, newText };
+  }
+  TextEdit2.insert = insert;
+  function del(range) {
+    return { range, newText: "" };
+  }
+  TextEdit2.del = del;
+  function is(value) {
+    var candidate = value;
+    return Is.objectLiteral(candidate) && Is.string(candidate.newText) && Range.is(candidate.range);
+  }
+  TextEdit2.is = is;
+})(TextEdit || (TextEdit = {}));
+var ChangeAnnotation;
+(function(ChangeAnnotation2) {
+  function create(label, needsConfirmation, description) {
+    var result = { label };
+    if (needsConfirmation !== void 0) {
+      result.needsConfirmation = needsConfirmation;
+    }
+    if (description !== void 0) {
+      result.description = description;
+    }
+    return result;
+  }
+  ChangeAnnotation2.create = create;
+  function is(value) {
+    var candidate = value;
+    return candidate !== void 0 && Is.objectLiteral(candidate) && Is.string(candidate.label) && (Is.boolean(candidate.needsConfirmation) || candidate.needsConfirmation === void 0) && (Is.string(candidate.description) || candidate.description === void 0);
+  }
+  ChangeAnnotation2.is = is;
+})(ChangeAnnotation || (ChangeAnnotation = {}));
+var ChangeAnnotationIdentifier;
+(function(ChangeAnnotationIdentifier2) {
+  function is(value) {
+    var candidate = value;
+    return typeof candidate === "string";
+  }
+  ChangeAnnotationIdentifier2.is = is;
+})(ChangeAnnotationIdentifier || (ChangeAnnotationIdentifier = {}));
+var AnnotatedTextEdit;
+(function(AnnotatedTextEdit2) {
+  function replace(range, newText, annotation) {
+    return { range, newText, annotationId: annotation };
+  }
+  AnnotatedTextEdit2.replace = replace;
+  function insert(position, newText, annotation) {
+    return { range: { start: position, end: position }, newText, annotationId: annotation };
+  }
+  AnnotatedTextEdit2.insert = insert;
+  function del(range, annotation) {
+    return { range, newText: "", annotationId: annotation };
+  }
+  AnnotatedTextEdit2.del = del;
+  function is(value) {
+    var candidate = value;
+    return TextEdit.is(candidate) && (ChangeAnnotation.is(candidate.annotationId) || ChangeAnnotationIdentifier.is(candidate.annotationId));
+  }
+  AnnotatedTextEdit2.is = is;
+})(AnnotatedTextEdit || (AnnotatedTextEdit = {}));
+var TextDocumentEdit;
+(function(TextDocumentEdit2) {
+  function create(textDocument, edits) {
+    return { textDocument, edits };
+  }
+  TextDocumentEdit2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && OptionalVersionedTextDocumentIdentifier.is(candidate.textDocument) && Array.isArray(candidate.edits);
+  }
+  TextDocumentEdit2.is = is;
+})(TextDocumentEdit || (TextDocumentEdit = {}));
+var CreateFile;
+(function(CreateFile2) {
+  function create(uri, options, annotation) {
+    var result = {
+      kind: "create",
+      uri
+    };
+    if (options !== void 0 && (options.overwrite !== void 0 || options.ignoreIfExists !== void 0)) {
+      result.options = options;
+    }
+    if (annotation !== void 0) {
+      result.annotationId = annotation;
+    }
+    return result;
+  }
+  CreateFile2.create = create;
+  function is(value) {
+    var candidate = value;
+    return candidate && candidate.kind === "create" && Is.string(candidate.uri) && (candidate.options === void 0 || (candidate.options.overwrite === void 0 || Is.boolean(candidate.options.overwrite)) && (candidate.options.ignoreIfExists === void 0 || Is.boolean(candidate.options.ignoreIfExists))) && (candidate.annotationId === void 0 || ChangeAnnotationIdentifier.is(candidate.annotationId));
+  }
+  CreateFile2.is = is;
+})(CreateFile || (CreateFile = {}));
+var RenameFile;
+(function(RenameFile2) {
+  function create(oldUri, newUri, options, annotation) {
+    var result = {
+      kind: "rename",
+      oldUri,
+      newUri
+    };
+    if (options !== void 0 && (options.overwrite !== void 0 || options.ignoreIfExists !== void 0)) {
+      result.options = options;
+    }
+    if (annotation !== void 0) {
+      result.annotationId = annotation;
+    }
+    return result;
+  }
+  RenameFile2.create = create;
+  function is(value) {
+    var candidate = value;
+    return candidate && candidate.kind === "rename" && Is.string(candidate.oldUri) && Is.string(candidate.newUri) && (candidate.options === void 0 || (candidate.options.overwrite === void 0 || Is.boolean(candidate.options.overwrite)) && (candidate.options.ignoreIfExists === void 0 || Is.boolean(candidate.options.ignoreIfExists))) && (candidate.annotationId === void 0 || ChangeAnnotationIdentifier.is(candidate.annotationId));
+  }
+  RenameFile2.is = is;
+})(RenameFile || (RenameFile = {}));
+var DeleteFile;
+(function(DeleteFile2) {
+  function create(uri, options, annotation) {
+    var result = {
+      kind: "delete",
+      uri
+    };
+    if (options !== void 0 && (options.recursive !== void 0 || options.ignoreIfNotExists !== void 0)) {
+      result.options = options;
+    }
+    if (annotation !== void 0) {
+      result.annotationId = annotation;
+    }
+    return result;
+  }
+  DeleteFile2.create = create;
+  function is(value) {
+    var candidate = value;
+    return candidate && candidate.kind === "delete" && Is.string(candidate.uri) && (candidate.options === void 0 || (candidate.options.recursive === void 0 || Is.boolean(candidate.options.recursive)) && (candidate.options.ignoreIfNotExists === void 0 || Is.boolean(candidate.options.ignoreIfNotExists))) && (candidate.annotationId === void 0 || ChangeAnnotationIdentifier.is(candidate.annotationId));
+  }
+  DeleteFile2.is = is;
+})(DeleteFile || (DeleteFile = {}));
+var WorkspaceEdit;
+(function(WorkspaceEdit2) {
+  function is(value) {
+    var candidate = value;
+    return candidate && (candidate.changes !== void 0 || candidate.documentChanges !== void 0) && (candidate.documentChanges === void 0 || candidate.documentChanges.every(function(change) {
+      if (Is.string(change.kind)) {
+        return CreateFile.is(change) || RenameFile.is(change) || DeleteFile.is(change);
+      } else {
+        return TextDocumentEdit.is(change);
+      }
+    }));
+  }
+  WorkspaceEdit2.is = is;
+})(WorkspaceEdit || (WorkspaceEdit = {}));
+var TextEditChangeImpl = function() {
+  function TextEditChangeImpl2(edits, changeAnnotations) {
+    this.edits = edits;
+    this.changeAnnotations = changeAnnotations;
+  }
+  TextEditChangeImpl2.prototype.insert = function(position, newText, annotation) {
+    var edit;
+    var id;
+    if (annotation === void 0) {
+      edit = TextEdit.insert(position, newText);
+    } else if (ChangeAnnotationIdentifier.is(annotation)) {
+      id = annotation;
+      edit = AnnotatedTextEdit.insert(position, newText, annotation);
+    } else {
+      this.assertChangeAnnotations(this.changeAnnotations);
+      id = this.changeAnnotations.manage(annotation);
+      edit = AnnotatedTextEdit.insert(position, newText, id);
+    }
+    this.edits.push(edit);
+    if (id !== void 0) {
+      return id;
+    }
+  };
+  TextEditChangeImpl2.prototype.replace = function(range, newText, annotation) {
+    var edit;
+    var id;
+    if (annotation === void 0) {
+      edit = TextEdit.replace(range, newText);
+    } else if (ChangeAnnotationIdentifier.is(annotation)) {
+      id = annotation;
+      edit = AnnotatedTextEdit.replace(range, newText, annotation);
+    } else {
+      this.assertChangeAnnotations(this.changeAnnotations);
+      id = this.changeAnnotations.manage(annotation);
+      edit = AnnotatedTextEdit.replace(range, newText, id);
+    }
+    this.edits.push(edit);
+    if (id !== void 0) {
+      return id;
+    }
+  };
+  TextEditChangeImpl2.prototype.delete = function(range, annotation) {
+    var edit;
+    var id;
+    if (annotation === void 0) {
+      edit = TextEdit.del(range);
+    } else if (ChangeAnnotationIdentifier.is(annotation)) {
+      id = annotation;
+      edit = AnnotatedTextEdit.del(range, annotation);
+    } else {
+      this.assertChangeAnnotations(this.changeAnnotations);
+      id = this.changeAnnotations.manage(annotation);
+      edit = AnnotatedTextEdit.del(range, id);
+    }
+    this.edits.push(edit);
+    if (id !== void 0) {
+      return id;
+    }
+  };
+  TextEditChangeImpl2.prototype.add = function(edit) {
+    this.edits.push(edit);
+  };
+  TextEditChangeImpl2.prototype.all = function() {
+    return this.edits;
+  };
+  TextEditChangeImpl2.prototype.clear = function() {
+    this.edits.splice(0, this.edits.length);
+  };
+  TextEditChangeImpl2.prototype.assertChangeAnnotations = function(value) {
+    if (value === void 0) {
+      throw new Error("Text edit change is not configured to manage change annotations.");
+    }
+  };
+  return TextEditChangeImpl2;
+}();
+var ChangeAnnotations = function() {
+  function ChangeAnnotations2(annotations) {
+    this._annotations = annotations === void 0 ? /* @__PURE__ */ Object.create(null) : annotations;
+    this._counter = 0;
+    this._size = 0;
+  }
+  ChangeAnnotations2.prototype.all = function() {
+    return this._annotations;
+  };
+  Object.defineProperty(ChangeAnnotations2.prototype, "size", {
+    get: function() {
+      return this._size;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  ChangeAnnotations2.prototype.manage = function(idOrAnnotation, annotation) {
+    var id;
+    if (ChangeAnnotationIdentifier.is(idOrAnnotation)) {
+      id = idOrAnnotation;
+    } else {
+      id = this.nextId();
+      annotation = idOrAnnotation;
+    }
+    if (this._annotations[id] !== void 0) {
+      throw new Error("Id " + id + " is already in use.");
+    }
+    if (annotation === void 0) {
+      throw new Error("No annotation provided for id " + id);
+    }
+    this._annotations[id] = annotation;
+    this._size++;
+    return id;
+  };
+  ChangeAnnotations2.prototype.nextId = function() {
+    this._counter++;
+    return this._counter.toString();
+  };
+  return ChangeAnnotations2;
+}();
+(function() {
+  function WorkspaceChange2(workspaceEdit) {
+    var _this = this;
+    this._textEditChanges = /* @__PURE__ */ Object.create(null);
+    if (workspaceEdit !== void 0) {
+      this._workspaceEdit = workspaceEdit;
+      if (workspaceEdit.documentChanges) {
+        this._changeAnnotations = new ChangeAnnotations(workspaceEdit.changeAnnotations);
+        workspaceEdit.changeAnnotations = this._changeAnnotations.all();
+        workspaceEdit.documentChanges.forEach(function(change) {
+          if (TextDocumentEdit.is(change)) {
+            var textEditChange = new TextEditChangeImpl(change.edits, _this._changeAnnotations);
+            _this._textEditChanges[change.textDocument.uri] = textEditChange;
+          }
+        });
+      } else if (workspaceEdit.changes) {
+        Object.keys(workspaceEdit.changes).forEach(function(key) {
+          var textEditChange = new TextEditChangeImpl(workspaceEdit.changes[key]);
+          _this._textEditChanges[key] = textEditChange;
+        });
+      }
+    } else {
+      this._workspaceEdit = {};
+    }
+  }
+  Object.defineProperty(WorkspaceChange2.prototype, "edit", {
+    get: function() {
+      this.initDocumentChanges();
+      if (this._changeAnnotations !== void 0) {
+        if (this._changeAnnotations.size === 0) {
+          this._workspaceEdit.changeAnnotations = void 0;
+        } else {
+          this._workspaceEdit.changeAnnotations = this._changeAnnotations.all();
+        }
+      }
+      return this._workspaceEdit;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  WorkspaceChange2.prototype.getTextEditChange = function(key) {
+    if (OptionalVersionedTextDocumentIdentifier.is(key)) {
+      this.initDocumentChanges();
+      if (this._workspaceEdit.documentChanges === void 0) {
+        throw new Error("Workspace edit is not configured for document changes.");
+      }
+      var textDocument = { uri: key.uri, version: key.version };
+      var result = this._textEditChanges[textDocument.uri];
+      if (!result) {
+        var edits = [];
+        var textDocumentEdit = {
+          textDocument,
+          edits
+        };
+        this._workspaceEdit.documentChanges.push(textDocumentEdit);
+        result = new TextEditChangeImpl(edits, this._changeAnnotations);
+        this._textEditChanges[textDocument.uri] = result;
+      }
+      return result;
+    } else {
+      this.initChanges();
+      if (this._workspaceEdit.changes === void 0) {
+        throw new Error("Workspace edit is not configured for normal text edit changes.");
+      }
+      var result = this._textEditChanges[key];
+      if (!result) {
+        var edits = [];
+        this._workspaceEdit.changes[key] = edits;
+        result = new TextEditChangeImpl(edits);
+        this._textEditChanges[key] = result;
+      }
+      return result;
+    }
+  };
+  WorkspaceChange2.prototype.initDocumentChanges = function() {
+    if (this._workspaceEdit.documentChanges === void 0 && this._workspaceEdit.changes === void 0) {
+      this._changeAnnotations = new ChangeAnnotations();
+      this._workspaceEdit.documentChanges = [];
+      this._workspaceEdit.changeAnnotations = this._changeAnnotations.all();
+    }
+  };
+  WorkspaceChange2.prototype.initChanges = function() {
+    if (this._workspaceEdit.documentChanges === void 0 && this._workspaceEdit.changes === void 0) {
+      this._workspaceEdit.changes = /* @__PURE__ */ Object.create(null);
+    }
+  };
+  WorkspaceChange2.prototype.createFile = function(uri, optionsOrAnnotation, options) {
+    this.initDocumentChanges();
+    if (this._workspaceEdit.documentChanges === void 0) {
+      throw new Error("Workspace edit is not configured for document changes.");
+    }
+    var annotation;
+    if (ChangeAnnotation.is(optionsOrAnnotation) || ChangeAnnotationIdentifier.is(optionsOrAnnotation)) {
+      annotation = optionsOrAnnotation;
+    } else {
+      options = optionsOrAnnotation;
+    }
+    var operation;
+    var id;
+    if (annotation === void 0) {
+      operation = CreateFile.create(uri, options);
+    } else {
+      id = ChangeAnnotationIdentifier.is(annotation) ? annotation : this._changeAnnotations.manage(annotation);
+      operation = CreateFile.create(uri, options, id);
+    }
+    this._workspaceEdit.documentChanges.push(operation);
+    if (id !== void 0) {
+      return id;
+    }
+  };
+  WorkspaceChange2.prototype.renameFile = function(oldUri, newUri, optionsOrAnnotation, options) {
+    this.initDocumentChanges();
+    if (this._workspaceEdit.documentChanges === void 0) {
+      throw new Error("Workspace edit is not configured for document changes.");
+    }
+    var annotation;
+    if (ChangeAnnotation.is(optionsOrAnnotation) || ChangeAnnotationIdentifier.is(optionsOrAnnotation)) {
+      annotation = optionsOrAnnotation;
+    } else {
+      options = optionsOrAnnotation;
+    }
+    var operation;
+    var id;
+    if (annotation === void 0) {
+      operation = RenameFile.create(oldUri, newUri, options);
+    } else {
+      id = ChangeAnnotationIdentifier.is(annotation) ? annotation : this._changeAnnotations.manage(annotation);
+      operation = RenameFile.create(oldUri, newUri, options, id);
+    }
+    this._workspaceEdit.documentChanges.push(operation);
+    if (id !== void 0) {
+      return id;
+    }
+  };
+  WorkspaceChange2.prototype.deleteFile = function(uri, optionsOrAnnotation, options) {
+    this.initDocumentChanges();
+    if (this._workspaceEdit.documentChanges === void 0) {
+      throw new Error("Workspace edit is not configured for document changes.");
+    }
+    var annotation;
+    if (ChangeAnnotation.is(optionsOrAnnotation) || ChangeAnnotationIdentifier.is(optionsOrAnnotation)) {
+      annotation = optionsOrAnnotation;
+    } else {
+      options = optionsOrAnnotation;
+    }
+    var operation;
+    var id;
+    if (annotation === void 0) {
+      operation = DeleteFile.create(uri, options);
+    } else {
+      id = ChangeAnnotationIdentifier.is(annotation) ? annotation : this._changeAnnotations.manage(annotation);
+      operation = DeleteFile.create(uri, options, id);
+    }
+    this._workspaceEdit.documentChanges.push(operation);
+    if (id !== void 0) {
+      return id;
+    }
+  };
+  return WorkspaceChange2;
+})();
+var TextDocumentIdentifier;
+(function(TextDocumentIdentifier2) {
+  function create(uri) {
+    return { uri };
+  }
+  TextDocumentIdentifier2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Is.string(candidate.uri);
+  }
+  TextDocumentIdentifier2.is = is;
+})(TextDocumentIdentifier || (TextDocumentIdentifier = {}));
+var VersionedTextDocumentIdentifier;
+(function(VersionedTextDocumentIdentifier2) {
+  function create(uri, version) {
+    return { uri, version };
+  }
+  VersionedTextDocumentIdentifier2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Is.string(candidate.uri) && Is.integer(candidate.version);
+  }
+  VersionedTextDocumentIdentifier2.is = is;
+})(VersionedTextDocumentIdentifier || (VersionedTextDocumentIdentifier = {}));
+var OptionalVersionedTextDocumentIdentifier;
+(function(OptionalVersionedTextDocumentIdentifier2) {
+  function create(uri, version) {
+    return { uri, version };
+  }
+  OptionalVersionedTextDocumentIdentifier2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Is.string(candidate.uri) && (candidate.version === null || Is.integer(candidate.version));
+  }
+  OptionalVersionedTextDocumentIdentifier2.is = is;
+})(OptionalVersionedTextDocumentIdentifier || (OptionalVersionedTextDocumentIdentifier = {}));
+var TextDocumentItem;
+(function(TextDocumentItem2) {
+  function create(uri, languageId, version, text) {
+    return { uri, languageId, version, text };
+  }
+  TextDocumentItem2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Is.string(candidate.uri) && Is.string(candidate.languageId) && Is.integer(candidate.version) && Is.string(candidate.text);
+  }
+  TextDocumentItem2.is = is;
+})(TextDocumentItem || (TextDocumentItem = {}));
+var MarkupKind;
+(function(MarkupKind2) {
+  MarkupKind2.PlainText = "plaintext";
+  MarkupKind2.Markdown = "markdown";
+})(MarkupKind || (MarkupKind = {}));
+(function(MarkupKind2) {
+  function is(value) {
+    var candidate = value;
+    return candidate === MarkupKind2.PlainText || candidate === MarkupKind2.Markdown;
+  }
+  MarkupKind2.is = is;
+})(MarkupKind || (MarkupKind = {}));
+var MarkupContent;
+(function(MarkupContent2) {
+  function is(value) {
+    var candidate = value;
+    return Is.objectLiteral(value) && MarkupKind.is(candidate.kind) && Is.string(candidate.value);
+  }
+  MarkupContent2.is = is;
+})(MarkupContent || (MarkupContent = {}));
+var CompletionItemKind;
+(function(CompletionItemKind2) {
+  CompletionItemKind2.Text = 1;
+  CompletionItemKind2.Method = 2;
+  CompletionItemKind2.Function = 3;
+  CompletionItemKind2.Constructor = 4;
+  CompletionItemKind2.Field = 5;
+  CompletionItemKind2.Variable = 6;
+  CompletionItemKind2.Class = 7;
+  CompletionItemKind2.Interface = 8;
+  CompletionItemKind2.Module = 9;
+  CompletionItemKind2.Property = 10;
+  CompletionItemKind2.Unit = 11;
+  CompletionItemKind2.Value = 12;
+  CompletionItemKind2.Enum = 13;
+  CompletionItemKind2.Keyword = 14;
+  CompletionItemKind2.Snippet = 15;
+  CompletionItemKind2.Color = 16;
+  CompletionItemKind2.File = 17;
+  CompletionItemKind2.Reference = 18;
+  CompletionItemKind2.Folder = 19;
+  CompletionItemKind2.EnumMember = 20;
+  CompletionItemKind2.Constant = 21;
+  CompletionItemKind2.Struct = 22;
+  CompletionItemKind2.Event = 23;
+  CompletionItemKind2.Operator = 24;
+  CompletionItemKind2.TypeParameter = 25;
+})(CompletionItemKind || (CompletionItemKind = {}));
+var InsertTextFormat;
+(function(InsertTextFormat2) {
+  InsertTextFormat2.PlainText = 1;
+  InsertTextFormat2.Snippet = 2;
+})(InsertTextFormat || (InsertTextFormat = {}));
+var CompletionItemTag;
+(function(CompletionItemTag2) {
+  CompletionItemTag2.Deprecated = 1;
+})(CompletionItemTag || (CompletionItemTag = {}));
+var InsertReplaceEdit;
+(function(InsertReplaceEdit2) {
+  function create(newText, insert, replace) {
+    return { newText, insert, replace };
+  }
+  InsertReplaceEdit2.create = create;
+  function is(value) {
+    var candidate = value;
+    return candidate && Is.string(candidate.newText) && Range.is(candidate.insert) && Range.is(candidate.replace);
+  }
+  InsertReplaceEdit2.is = is;
+})(InsertReplaceEdit || (InsertReplaceEdit = {}));
+var InsertTextMode;
+(function(InsertTextMode2) {
+  InsertTextMode2.asIs = 1;
+  InsertTextMode2.adjustIndentation = 2;
+})(InsertTextMode || (InsertTextMode = {}));
+var CompletionItem;
+(function(CompletionItem2) {
+  function create(label) {
+    return { label };
+  }
+  CompletionItem2.create = create;
+})(CompletionItem || (CompletionItem = {}));
+var CompletionList;
+(function(CompletionList2) {
+  function create(items, isIncomplete) {
+    return { items: items ? items : [], isIncomplete: !!isIncomplete };
+  }
+  CompletionList2.create = create;
+})(CompletionList || (CompletionList = {}));
+var MarkedString;
+(function(MarkedString2) {
+  function fromPlainText(plainText) {
+    return plainText.replace(/[\\`*_{}[\]()#+\-.!]/g, "\\$&");
+  }
+  MarkedString2.fromPlainText = fromPlainText;
+  function is(value) {
+    var candidate = value;
+    return Is.string(candidate) || Is.objectLiteral(candidate) && Is.string(candidate.language) && Is.string(candidate.value);
+  }
+  MarkedString2.is = is;
+})(MarkedString || (MarkedString = {}));
+var Hover;
+(function(Hover2) {
+  function is(value) {
+    var candidate = value;
+    return !!candidate && Is.objectLiteral(candidate) && (MarkupContent.is(candidate.contents) || MarkedString.is(candidate.contents) || Is.typedArray(candidate.contents, MarkedString.is)) && (value.range === void 0 || Range.is(value.range));
+  }
+  Hover2.is = is;
+})(Hover || (Hover = {}));
+var ParameterInformation;
+(function(ParameterInformation2) {
+  function create(label, documentation) {
+    return documentation ? { label, documentation } : { label };
+  }
+  ParameterInformation2.create = create;
+})(ParameterInformation || (ParameterInformation = {}));
+var SignatureInformation;
+(function(SignatureInformation2) {
+  function create(label, documentation) {
+    var parameters = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+      parameters[_i - 2] = arguments[_i];
+    }
+    var result = { label };
+    if (Is.defined(documentation)) {
+      result.documentation = documentation;
+    }
+    if (Is.defined(parameters)) {
+      result.parameters = parameters;
+    } else {
+      result.parameters = [];
+    }
+    return result;
+  }
+  SignatureInformation2.create = create;
+})(SignatureInformation || (SignatureInformation = {}));
+var DocumentHighlightKind;
+(function(DocumentHighlightKind2) {
+  DocumentHighlightKind2.Text = 1;
+  DocumentHighlightKind2.Read = 2;
+  DocumentHighlightKind2.Write = 3;
+})(DocumentHighlightKind || (DocumentHighlightKind = {}));
+var DocumentHighlight;
+(function(DocumentHighlight2) {
+  function create(range, kind) {
+    var result = { range };
+    if (Is.number(kind)) {
+      result.kind = kind;
+    }
+    return result;
+  }
+  DocumentHighlight2.create = create;
+})(DocumentHighlight || (DocumentHighlight = {}));
+var SymbolKind;
+(function(SymbolKind2) {
+  SymbolKind2.File = 1;
+  SymbolKind2.Module = 2;
+  SymbolKind2.Namespace = 3;
+  SymbolKind2.Package = 4;
+  SymbolKind2.Class = 5;
+  SymbolKind2.Method = 6;
+  SymbolKind2.Property = 7;
+  SymbolKind2.Field = 8;
+  SymbolKind2.Constructor = 9;
+  SymbolKind2.Enum = 10;
+  SymbolKind2.Interface = 11;
+  SymbolKind2.Function = 12;
+  SymbolKind2.Variable = 13;
+  SymbolKind2.Constant = 14;
+  SymbolKind2.String = 15;
+  SymbolKind2.Number = 16;
+  SymbolKind2.Boolean = 17;
+  SymbolKind2.Array = 18;
+  SymbolKind2.Object = 19;
+  SymbolKind2.Key = 20;
+  SymbolKind2.Null = 21;
+  SymbolKind2.EnumMember = 22;
+  SymbolKind2.Struct = 23;
+  SymbolKind2.Event = 24;
+  SymbolKind2.Operator = 25;
+  SymbolKind2.TypeParameter = 26;
+})(SymbolKind || (SymbolKind = {}));
+var SymbolTag;
+(function(SymbolTag2) {
+  SymbolTag2.Deprecated = 1;
+})(SymbolTag || (SymbolTag = {}));
+var SymbolInformation;
+(function(SymbolInformation2) {
+  function create(name, kind, range, uri, containerName) {
+    var result = {
+      name,
+      kind,
+      location: { uri, range }
+    };
+    if (containerName) {
+      result.containerName = containerName;
+    }
+    return result;
+  }
+  SymbolInformation2.create = create;
+})(SymbolInformation || (SymbolInformation = {}));
+var DocumentSymbol;
+(function(DocumentSymbol2) {
+  function create(name, detail, kind, range, selectionRange, children) {
+    var result = {
+      name,
+      detail,
+      kind,
+      range,
+      selectionRange
+    };
+    if (children !== void 0) {
+      result.children = children;
+    }
+    return result;
+  }
+  DocumentSymbol2.create = create;
+  function is(value) {
+    var candidate = value;
+    return candidate && Is.string(candidate.name) && Is.number(candidate.kind) && Range.is(candidate.range) && Range.is(candidate.selectionRange) && (candidate.detail === void 0 || Is.string(candidate.detail)) && (candidate.deprecated === void 0 || Is.boolean(candidate.deprecated)) && (candidate.children === void 0 || Array.isArray(candidate.children)) && (candidate.tags === void 0 || Array.isArray(candidate.tags));
+  }
+  DocumentSymbol2.is = is;
+})(DocumentSymbol || (DocumentSymbol = {}));
+var CodeActionKind;
+(function(CodeActionKind2) {
+  CodeActionKind2.Empty = "";
+  CodeActionKind2.QuickFix = "quickfix";
+  CodeActionKind2.Refactor = "refactor";
+  CodeActionKind2.RefactorExtract = "refactor.extract";
+  CodeActionKind2.RefactorInline = "refactor.inline";
+  CodeActionKind2.RefactorRewrite = "refactor.rewrite";
+  CodeActionKind2.Source = "source";
+  CodeActionKind2.SourceOrganizeImports = "source.organizeImports";
+  CodeActionKind2.SourceFixAll = "source.fixAll";
+})(CodeActionKind || (CodeActionKind = {}));
+var CodeActionContext;
+(function(CodeActionContext2) {
+  function create(diagnostics, only) {
+    var result = { diagnostics };
+    if (only !== void 0 && only !== null) {
+      result.only = only;
+    }
+    return result;
+  }
+  CodeActionContext2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Is.typedArray(candidate.diagnostics, Diagnostic.is) && (candidate.only === void 0 || Is.typedArray(candidate.only, Is.string));
+  }
+  CodeActionContext2.is = is;
+})(CodeActionContext || (CodeActionContext = {}));
+var CodeAction;
+(function(CodeAction2) {
+  function create(title, kindOrCommandOrEdit, kind) {
+    var result = { title };
+    var checkKind = true;
+    if (typeof kindOrCommandOrEdit === "string") {
+      checkKind = false;
+      result.kind = kindOrCommandOrEdit;
+    } else if (Command.is(kindOrCommandOrEdit)) {
+      result.command = kindOrCommandOrEdit;
+    } else {
+      result.edit = kindOrCommandOrEdit;
+    }
+    if (checkKind && kind !== void 0) {
+      result.kind = kind;
+    }
+    return result;
+  }
+  CodeAction2.create = create;
+  function is(value) {
+    var candidate = value;
+    return candidate && Is.string(candidate.title) && (candidate.diagnostics === void 0 || Is.typedArray(candidate.diagnostics, Diagnostic.is)) && (candidate.kind === void 0 || Is.string(candidate.kind)) && (candidate.edit !== void 0 || candidate.command !== void 0) && (candidate.command === void 0 || Command.is(candidate.command)) && (candidate.isPreferred === void 0 || Is.boolean(candidate.isPreferred)) && (candidate.edit === void 0 || WorkspaceEdit.is(candidate.edit));
+  }
+  CodeAction2.is = is;
+})(CodeAction || (CodeAction = {}));
+var CodeLens;
+(function(CodeLens2) {
+  function create(range, data) {
+    var result = { range };
+    if (Is.defined(data)) {
+      result.data = data;
+    }
+    return result;
+  }
+  CodeLens2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Range.is(candidate.range) && (Is.undefined(candidate.command) || Command.is(candidate.command));
+  }
+  CodeLens2.is = is;
+})(CodeLens || (CodeLens = {}));
+var FormattingOptions;
+(function(FormattingOptions2) {
+  function create(tabSize, insertSpaces) {
+    return { tabSize, insertSpaces };
+  }
+  FormattingOptions2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Is.uinteger(candidate.tabSize) && Is.boolean(candidate.insertSpaces);
+  }
+  FormattingOptions2.is = is;
+})(FormattingOptions || (FormattingOptions = {}));
+var DocumentLink;
+(function(DocumentLink2) {
+  function create(range, target, data) {
+    return { range, target, data };
+  }
+  DocumentLink2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Range.is(candidate.range) && (Is.undefined(candidate.target) || Is.string(candidate.target));
+  }
+  DocumentLink2.is = is;
+})(DocumentLink || (DocumentLink = {}));
+var SelectionRange;
+(function(SelectionRange2) {
+  function create(range, parent) {
+    return { range, parent };
+  }
+  SelectionRange2.create = create;
+  function is(value) {
+    var candidate = value;
+    return candidate !== void 0 && Range.is(candidate.range) && (candidate.parent === void 0 || SelectionRange2.is(candidate.parent));
+  }
+  SelectionRange2.is = is;
+})(SelectionRange || (SelectionRange = {}));
+var TextDocument;
+(function(TextDocument2) {
+  function create(uri, languageId, version, content) {
+    return new FullTextDocument(uri, languageId, version, content);
+  }
+  TextDocument2.create = create;
+  function is(value) {
+    var candidate = value;
+    return Is.defined(candidate) && Is.string(candidate.uri) && (Is.undefined(candidate.languageId) || Is.string(candidate.languageId)) && Is.uinteger(candidate.lineCount) && Is.func(candidate.getText) && Is.func(candidate.positionAt) && Is.func(candidate.offsetAt) ? true : false;
+  }
+  TextDocument2.is = is;
+  function applyEdits(document, edits) {
+    var text = document.getText();
+    var sortedEdits = mergeSort(edits, function(a, b) {
+      var diff = a.range.start.line - b.range.start.line;
+      if (diff === 0) {
+        return a.range.start.character - b.range.start.character;
+      }
+      return diff;
+    });
+    var lastModifiedOffset = text.length;
+    for (var i = sortedEdits.length - 1; i >= 0; i--) {
+      var e = sortedEdits[i];
+      var startOffset = document.offsetAt(e.range.start);
+      var endOffset = document.offsetAt(e.range.end);
+      if (endOffset <= lastModifiedOffset) {
+        text = text.substring(0, startOffset) + e.newText + text.substring(endOffset, text.length);
+      } else {
+        throw new Error("Overlapping edit");
+      }
+      lastModifiedOffset = startOffset;
+    }
+    return text;
+  }
+  TextDocument2.applyEdits = applyEdits;
+  function mergeSort(data, compare) {
+    if (data.length <= 1) {
+      return data;
+    }
+    var p = data.length / 2 | 0;
+    var left = data.slice(0, p);
+    var right = data.slice(p);
+    mergeSort(left, compare);
+    mergeSort(right, compare);
+    var leftIdx = 0;
+    var rightIdx = 0;
+    var i = 0;
+    while (leftIdx < left.length && rightIdx < right.length) {
+      var ret = compare(left[leftIdx], right[rightIdx]);
+      if (ret <= 0) {
+        data[i++] = left[leftIdx++];
+      } else {
+        data[i++] = right[rightIdx++];
+      }
+    }
+    while (leftIdx < left.length) {
+      data[i++] = left[leftIdx++];
+    }
+    while (rightIdx < right.length) {
+      data[i++] = right[rightIdx++];
+    }
+    return data;
+  }
+})(TextDocument || (TextDocument = {}));
+var FullTextDocument = function() {
+  function FullTextDocument2(uri, languageId, version, content) {
+    this._uri = uri;
+    this._languageId = languageId;
+    this._version = version;
+    this._content = content;
+    this._lineOffsets = void 0;
+  }
+  Object.defineProperty(FullTextDocument2.prototype, "uri", {
+    get: function() {
+      return this._uri;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(FullTextDocument2.prototype, "languageId", {
+    get: function() {
+      return this._languageId;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(FullTextDocument2.prototype, "version", {
+    get: function() {
+      return this._version;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  FullTextDocument2.prototype.getText = function(range) {
+    if (range) {
+      var start = this.offsetAt(range.start);
+      var end = this.offsetAt(range.end);
+      return this._content.substring(start, end);
+    }
+    return this._content;
+  };
+  FullTextDocument2.prototype.update = function(event, version) {
+    this._content = event.text;
+    this._version = version;
+    this._lineOffsets = void 0;
+  };
+  FullTextDocument2.prototype.getLineOffsets = function() {
+    if (this._lineOffsets === void 0) {
+      var lineOffsets = [];
+      var text = this._content;
+      var isLineStart = true;
+      for (var i = 0; i < text.length; i++) {
+        if (isLineStart) {
+          lineOffsets.push(i);
+          isLineStart = false;
+        }
+        var ch = text.charAt(i);
+        isLineStart = ch === "\r" || ch === "\n";
+        if (ch === "\r" && i + 1 < text.length && text.charAt(i + 1) === "\n") {
+          i++;
+        }
+      }
+      if (isLineStart && text.length > 0) {
+        lineOffsets.push(text.length);
+      }
+      this._lineOffsets = lineOffsets;
+    }
+    return this._lineOffsets;
+  };
+  FullTextDocument2.prototype.positionAt = function(offset) {
+    offset = Math.max(Math.min(offset, this._content.length), 0);
+    var lineOffsets = this.getLineOffsets();
+    var low = 0, high = lineOffsets.length;
+    if (high === 0) {
+      return Position.create(0, offset);
+    }
+    while (low < high) {
+      var mid = Math.floor((low + high) / 2);
+      if (lineOffsets[mid] > offset) {
+        high = mid;
+      } else {
+        low = mid + 1;
+      }
+    }
+    var line = low - 1;
+    return Position.create(line, offset - lineOffsets[line]);
+  };
+  FullTextDocument2.prototype.offsetAt = function(position) {
+    var lineOffsets = this.getLineOffsets();
+    if (position.line >= lineOffsets.length) {
+      return this._content.length;
+    } else if (position.line < 0) {
+      return 0;
+    }
+    var lineOffset = lineOffsets[position.line];
+    var nextLineOffset = position.line + 1 < lineOffsets.length ? lineOffsets[position.line + 1] : this._content.length;
+    return Math.max(Math.min(lineOffset + position.character, nextLineOffset), lineOffset);
+  };
+  Object.defineProperty(FullTextDocument2.prototype, "lineCount", {
+    get: function() {
+      return this.getLineOffsets().length;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  return FullTextDocument2;
+}();
+var Is;
+(function(Is2) {
+  var toString = Object.prototype.toString;
+  function defined(value) {
+    return typeof value !== "undefined";
+  }
+  Is2.defined = defined;
+  function undefined2(value) {
+    return typeof value === "undefined";
+  }
+  Is2.undefined = undefined2;
+  function boolean(value) {
+    return value === true || value === false;
+  }
+  Is2.boolean = boolean;
+  function string(value) {
+    return toString.call(value) === "[object String]";
+  }
+  Is2.string = string;
+  function number(value) {
+    return toString.call(value) === "[object Number]";
+  }
+  Is2.number = number;
+  function numberRange(value, min, max) {
+    return toString.call(value) === "[object Number]" && min <= value && value <= max;
+  }
+  Is2.numberRange = numberRange;
+  function integer2(value) {
+    return toString.call(value) === "[object Number]" && -2147483648 <= value && value <= 2147483647;
+  }
+  Is2.integer = integer2;
+  function uinteger2(value) {
+    return toString.call(value) === "[object Number]" && 0 <= value && value <= 2147483647;
+  }
+  Is2.uinteger = uinteger2;
+  function func(value) {
+    return toString.call(value) === "[object Function]";
+  }
+  Is2.func = func;
+  function objectLiteral(value) {
+    return value !== null && typeof value === "object";
+  }
+  Is2.objectLiteral = objectLiteral;
+  function typedArray(value, check) {
+    return Array.isArray(value) && value.every(check);
+  }
+  Is2.typedArray = typedArray;
+})(Is || (Is = {}));
+var DiagnosticsAdapter = class {
+  constructor(_languageId, _worker, configChangeEvent) {
+    __publicField(this, "_disposables", []);
+    __publicField(this, "_listener", /* @__PURE__ */ Object.create(null));
+    this._languageId = _languageId;
+    this._worker = _worker;
+    const onModelAdd = (model) => {
+      let modeId = model.getLanguageId();
+      if (modeId !== this._languageId) {
+        return;
+      }
+      let handle;
+      this._listener[model.uri.toString()] = model.onDidChangeContent(() => {
+        window.clearTimeout(handle);
+        handle = window.setTimeout(() => this._doValidate(model.uri, modeId), 500);
+      });
+      this._doValidate(model.uri, modeId);
+    };
+    const onModelRemoved = (model) => {
+      monaco_editor_core_exports.editor.setModelMarkers(model, this._languageId, []);
+      let uriStr = model.uri.toString();
+      let listener = this._listener[uriStr];
+      if (listener) {
+        listener.dispose();
+        delete this._listener[uriStr];
+      }
+    };
+    this._disposables.push(monaco_editor_core_exports.editor.onDidCreateModel(onModelAdd));
+    this._disposables.push(monaco_editor_core_exports.editor.onWillDisposeModel(onModelRemoved));
+    this._disposables.push(monaco_editor_core_exports.editor.onDidChangeModelLanguage((event) => {
+      onModelRemoved(event.model);
+      onModelAdd(event.model);
+    }));
+    this._disposables.push(configChangeEvent((_) => {
+      monaco_editor_core_exports.editor.getModels().forEach((model) => {
+        if (model.getLanguageId() === this._languageId) {
+          onModelRemoved(model);
+          onModelAdd(model);
+        }
+      });
+    }));
+    this._disposables.push({
+      dispose: () => {
+        monaco_editor_core_exports.editor.getModels().forEach(onModelRemoved);
+        for (let key in this._listener) {
+          this._listener[key].dispose();
+        }
+      }
+    });
+    monaco_editor_core_exports.editor.getModels().forEach(onModelAdd);
+  }
+  dispose() {
+    this._disposables.forEach((d) => d && d.dispose());
+    this._disposables.length = 0;
+  }
+  _doValidate(resource, languageId) {
+    this._worker(resource).then((worker) => {
+      return worker.doValidation(resource.toString());
+    }).then((diagnostics) => {
+      const markers = diagnostics.map((d) => toDiagnostics(resource, d));
+      let model = monaco_editor_core_exports.editor.getModel(resource);
+      if (model && model.getLanguageId() === languageId) {
+        monaco_editor_core_exports.editor.setModelMarkers(model, languageId, markers);
+      }
+    }).then(void 0, (err) => {
+      console.error(err);
+    });
+  }
+};
+function toSeverity(lsSeverity) {
+  switch (lsSeverity) {
+    case DiagnosticSeverity.Error:
+      return monaco_editor_core_exports.MarkerSeverity.Error;
+    case DiagnosticSeverity.Warning:
+      return monaco_editor_core_exports.MarkerSeverity.Warning;
+    case DiagnosticSeverity.Information:
+      return monaco_editor_core_exports.MarkerSeverity.Info;
+    case DiagnosticSeverity.Hint:
+      return monaco_editor_core_exports.MarkerSeverity.Hint;
+    default:
+      return monaco_editor_core_exports.MarkerSeverity.Info;
+  }
+}
+function toDiagnostics(resource, diag) {
+  let code = typeof diag.code === "number" ? String(diag.code) : diag.code;
+  return {
+    severity: toSeverity(diag.severity),
+    startLineNumber: diag.range.start.line + 1,
+    startColumn: diag.range.start.character + 1,
+    endLineNumber: diag.range.end.line + 1,
+    endColumn: diag.range.end.character + 1,
+    message: diag.message,
+    code,
+    source: diag.source
+  };
+}
+var CompletionAdapter = class {
+  constructor(_worker, _triggerCharacters) {
+    this._worker = _worker;
+    this._triggerCharacters = _triggerCharacters;
+  }
+  get triggerCharacters() {
+    return this._triggerCharacters;
+  }
+  provideCompletionItems(model, position, context, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => {
+      return worker.doComplete(resource.toString(), fromPosition(position));
+    }).then((info) => {
+      if (!info) {
+        return;
+      }
+      const wordInfo = model.getWordUntilPosition(position);
+      const wordRange = new monaco_editor_core_exports.Range(position.lineNumber, wordInfo.startColumn, position.lineNumber, wordInfo.endColumn);
+      const items = info.items.map((entry) => {
+        const item = {
+          label: entry.label,
+          insertText: entry.insertText || entry.label,
+          sortText: entry.sortText,
+          filterText: entry.filterText,
+          documentation: entry.documentation,
+          detail: entry.detail,
+          command: toCommand(entry.command),
+          range: wordRange,
+          kind: toCompletionItemKind(entry.kind)
+        };
+        if (entry.textEdit) {
+          if (isInsertReplaceEdit(entry.textEdit)) {
+            item.range = {
+              insert: toRange(entry.textEdit.insert),
+              replace: toRange(entry.textEdit.replace)
+            };
+          } else {
+            item.range = toRange(entry.textEdit.range);
+          }
+          item.insertText = entry.textEdit.newText;
+        }
+        if (entry.additionalTextEdits) {
+          item.additionalTextEdits = entry.additionalTextEdits.map(toTextEdit);
+        }
+        if (entry.insertTextFormat === InsertTextFormat.Snippet) {
+          item.insertTextRules = monaco_editor_core_exports.languages.CompletionItemInsertTextRule.InsertAsSnippet;
+        }
+        return item;
+      });
+      return {
+        isIncomplete: info.isIncomplete,
+        suggestions: items
+      };
+    });
+  }
+};
+function fromPosition(position) {
+  if (!position) {
+    return void 0;
+  }
+  return { character: position.column - 1, line: position.lineNumber - 1 };
+}
+function fromRange(range) {
+  if (!range) {
+    return void 0;
+  }
+  return {
+    start: {
+      line: range.startLineNumber - 1,
+      character: range.startColumn - 1
+    },
+    end: { line: range.endLineNumber - 1, character: range.endColumn - 1 }
+  };
+}
+function toRange(range) {
+  if (!range) {
+    return void 0;
+  }
+  return new monaco_editor_core_exports.Range(range.start.line + 1, range.start.character + 1, range.end.line + 1, range.end.character + 1);
+}
+function isInsertReplaceEdit(edit) {
+  return typeof edit.insert !== "undefined" && typeof edit.replace !== "undefined";
+}
+function toCompletionItemKind(kind) {
+  const mItemKind = monaco_editor_core_exports.languages.CompletionItemKind;
+  switch (kind) {
+    case CompletionItemKind.Text:
+      return mItemKind.Text;
+    case CompletionItemKind.Method:
+      return mItemKind.Method;
+    case CompletionItemKind.Function:
+      return mItemKind.Function;
+    case CompletionItemKind.Constructor:
+      return mItemKind.Constructor;
+    case CompletionItemKind.Field:
+      return mItemKind.Field;
+    case CompletionItemKind.Variable:
+      return mItemKind.Variable;
+    case CompletionItemKind.Class:
+      return mItemKind.Class;
+    case CompletionItemKind.Interface:
+      return mItemKind.Interface;
+    case CompletionItemKind.Module:
+      return mItemKind.Module;
+    case CompletionItemKind.Property:
+      return mItemKind.Property;
+    case CompletionItemKind.Unit:
+      return mItemKind.Unit;
+    case CompletionItemKind.Value:
+      return mItemKind.Value;
+    case CompletionItemKind.Enum:
+      return mItemKind.Enum;
+    case CompletionItemKind.Keyword:
+      return mItemKind.Keyword;
+    case CompletionItemKind.Snippet:
+      return mItemKind.Snippet;
+    case CompletionItemKind.Color:
+      return mItemKind.Color;
+    case CompletionItemKind.File:
+      return mItemKind.File;
+    case CompletionItemKind.Reference:
+      return mItemKind.Reference;
+  }
+  return mItemKind.Property;
+}
+function toTextEdit(textEdit) {
+  if (!textEdit) {
+    return void 0;
+  }
+  return {
+    range: toRange(textEdit.range),
+    text: textEdit.newText
+  };
+}
+function toCommand(c) {
+  return c && c.command === "editor.action.triggerSuggest" ? { id: c.command, title: c.title, arguments: c.arguments } : void 0;
+}
+var HoverAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideHover(model, position, token) {
+    let resource = model.uri;
+    return this._worker(resource).then((worker) => {
+      return worker.doHover(resource.toString(), fromPosition(position));
+    }).then((info) => {
+      if (!info) {
+        return;
+      }
+      return {
+        range: toRange(info.range),
+        contents: toMarkedStringArray(info.contents)
+      };
+    });
+  }
+};
+function isMarkupContent(thing) {
+  return thing && typeof thing === "object" && typeof thing.kind === "string";
+}
+function toMarkdownString(entry) {
+  if (typeof entry === "string") {
+    return {
+      value: entry
+    };
+  }
+  if (isMarkupContent(entry)) {
+    if (entry.kind === "plaintext") {
+      return {
+        value: entry.value.replace(/[\\`*_{}[\]()#+\-.!]/g, "\\$&")
+      };
+    }
+    return {
+      value: entry.value
+    };
+  }
+  return { value: "```" + entry.language + "\n" + entry.value + "\n```\n" };
+}
+function toMarkedStringArray(contents) {
+  if (!contents) {
+    return void 0;
+  }
+  if (Array.isArray(contents)) {
+    return contents.map(toMarkdownString);
+  }
+  return [toMarkdownString(contents)];
+}
+var DocumentHighlightAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideDocumentHighlights(model, position, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => worker.findDocumentHighlights(resource.toString(), fromPosition(position))).then((entries) => {
+      if (!entries) {
+        return;
+      }
+      return entries.map((entry) => {
+        return {
+          range: toRange(entry.range),
+          kind: toDocumentHighlightKind(entry.kind)
+        };
+      });
+    });
+  }
+};
+function toDocumentHighlightKind(kind) {
+  switch (kind) {
+    case DocumentHighlightKind.Read:
+      return monaco_editor_core_exports.languages.DocumentHighlightKind.Read;
+    case DocumentHighlightKind.Write:
+      return monaco_editor_core_exports.languages.DocumentHighlightKind.Write;
+    case DocumentHighlightKind.Text:
+      return monaco_editor_core_exports.languages.DocumentHighlightKind.Text;
+  }
+  return monaco_editor_core_exports.languages.DocumentHighlightKind.Text;
+}
+var DefinitionAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideDefinition(model, position, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => {
+      return worker.findDefinition(resource.toString(), fromPosition(position));
+    }).then((definition) => {
+      if (!definition) {
+        return;
+      }
+      return [toLocation(definition)];
+    });
+  }
+};
+function toLocation(location) {
+  return {
+    uri: monaco_editor_core_exports.Uri.parse(location.uri),
+    range: toRange(location.range)
+  };
+}
+var ReferenceAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideReferences(model, position, context, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => {
+      return worker.findReferences(resource.toString(), fromPosition(position));
+    }).then((entries) => {
+      if (!entries) {
+        return;
+      }
+      return entries.map(toLocation);
+    });
+  }
+};
+var RenameAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideRenameEdits(model, position, newName, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => {
+      return worker.doRename(resource.toString(), fromPosition(position), newName);
+    }).then((edit) => {
+      return toWorkspaceEdit(edit);
+    });
+  }
+};
+function toWorkspaceEdit(edit) {
+  if (!edit || !edit.changes) {
+    return void 0;
+  }
+  let resourceEdits = [];
+  for (let uri in edit.changes) {
+    const _uri = monaco_editor_core_exports.Uri.parse(uri);
+    for (let e of edit.changes[uri]) {
+      resourceEdits.push({
+        resource: _uri,
+        versionId: void 0,
+        textEdit: {
+          range: toRange(e.range),
+          text: e.newText
+        }
+      });
+    }
+  }
+  return {
+    edits: resourceEdits
+  };
+}
+var DocumentSymbolAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideDocumentSymbols(model, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => worker.findDocumentSymbols(resource.toString())).then((items) => {
+      if (!items) {
+        return;
+      }
+      return items.map((item) => ({
+        name: item.name,
+        detail: "",
+        containerName: item.containerName,
+        kind: toSymbolKind(item.kind),
+        range: toRange(item.location.range),
+        selectionRange: toRange(item.location.range),
+        tags: []
+      }));
+    });
+  }
+};
+function toSymbolKind(kind) {
+  let mKind = monaco_editor_core_exports.languages.SymbolKind;
+  switch (kind) {
+    case SymbolKind.File:
+      return mKind.Array;
+    case SymbolKind.Module:
+      return mKind.Module;
+    case SymbolKind.Namespace:
+      return mKind.Namespace;
+    case SymbolKind.Package:
+      return mKind.Package;
+    case SymbolKind.Class:
+      return mKind.Class;
+    case SymbolKind.Method:
+      return mKind.Method;
+    case SymbolKind.Property:
+      return mKind.Property;
+    case SymbolKind.Field:
+      return mKind.Field;
+    case SymbolKind.Constructor:
+      return mKind.Constructor;
+    case SymbolKind.Enum:
+      return mKind.Enum;
+    case SymbolKind.Interface:
+      return mKind.Interface;
+    case SymbolKind.Function:
+      return mKind.Function;
+    case SymbolKind.Variable:
+      return mKind.Variable;
+    case SymbolKind.Constant:
+      return mKind.Constant;
+    case SymbolKind.String:
+      return mKind.String;
+    case SymbolKind.Number:
+      return mKind.Number;
+    case SymbolKind.Boolean:
+      return mKind.Boolean;
+    case SymbolKind.Array:
+      return mKind.Array;
+  }
+  return mKind.Function;
+}
+var DocumentLinkAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideLinks(model, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => worker.findDocumentLinks(resource.toString())).then((items) => {
+      if (!items) {
+        return;
+      }
+      return {
+        links: items.map((item) => ({
+          range: toRange(item.range),
+          url: item.target
+        }))
+      };
+    });
+  }
+};
+var DocumentFormattingEditProvider = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideDocumentFormattingEdits(model, options, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => {
+      return worker.format(resource.toString(), null, fromFormattingOptions(options)).then((edits) => {
+        if (!edits || edits.length === 0) {
+          return;
+        }
+        return edits.map(toTextEdit);
+      });
+    });
+  }
+};
+var DocumentRangeFormattingEditProvider = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideDocumentRangeFormattingEdits(model, range, options, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => {
+      return worker.format(resource.toString(), fromRange(range), fromFormattingOptions(options)).then((edits) => {
+        if (!edits || edits.length === 0) {
+          return;
+        }
+        return edits.map(toTextEdit);
+      });
+    });
+  }
+};
+function fromFormattingOptions(options) {
+  return {
+    tabSize: options.tabSize,
+    insertSpaces: options.insertSpaces
+  };
+}
+var DocumentColorAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideDocumentColors(model, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => worker.findDocumentColors(resource.toString())).then((infos) => {
+      if (!infos) {
+        return;
+      }
+      return infos.map((item) => ({
+        color: item.color,
+        range: toRange(item.range)
+      }));
+    });
+  }
+  provideColorPresentations(model, info, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => worker.getColorPresentations(resource.toString(), info.color, fromRange(info.range))).then((presentations) => {
+      if (!presentations) {
+        return;
+      }
+      return presentations.map((presentation) => {
+        let item = {
+          label: presentation.label
+        };
+        if (presentation.textEdit) {
+          item.textEdit = toTextEdit(presentation.textEdit);
+        }
+        if (presentation.additionalTextEdits) {
+          item.additionalTextEdits = presentation.additionalTextEdits.map(toTextEdit);
+        }
+        return item;
+      });
+    });
+  }
+};
+var FoldingRangeAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideFoldingRanges(model, context, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => worker.getFoldingRanges(resource.toString(), context)).then((ranges) => {
+      if (!ranges) {
+        return;
+      }
+      return ranges.map((range) => {
+        const result = {
+          start: range.startLine + 1,
+          end: range.endLine + 1
+        };
+        if (typeof range.kind !== "undefined") {
+          result.kind = toFoldingRangeKind(range.kind);
+        }
+        return result;
+      });
+    });
+  }
+};
+function toFoldingRangeKind(kind) {
+  switch (kind) {
+    case FoldingRangeKind.Comment:
+      return monaco_editor_core_exports.languages.FoldingRangeKind.Comment;
+    case FoldingRangeKind.Imports:
+      return monaco_editor_core_exports.languages.FoldingRangeKind.Imports;
+    case FoldingRangeKind.Region:
+      return monaco_editor_core_exports.languages.FoldingRangeKind.Region;
+  }
+  return void 0;
+}
+var SelectionRangeAdapter = class {
+  constructor(_worker) {
+    this._worker = _worker;
+  }
+  provideSelectionRanges(model, positions, token) {
+    const resource = model.uri;
+    return this._worker(resource).then((worker) => worker.getSelectionRanges(resource.toString(), positions.map(fromPosition))).then((selectionRanges) => {
+      if (!selectionRanges) {
+        return;
+      }
+      return selectionRanges.map((selectionRange) => {
+        const result = [];
+        while (selectionRange) {
+          result.push({ range: toRange(selectionRange.range) });
+          selectionRange = selectionRange.parent;
+        }
+        return result;
+      });
+    });
+  }
+};
+function createScanner(text, ignoreTrivia) {
+  if (ignoreTrivia === void 0) {
+    ignoreTrivia = false;
+  }
+  var len = text.length;
+  var pos = 0, value = "", tokenOffset = 0, token = 16, lineNumber = 0, lineStartOffset = 0, tokenLineStartOffset = 0, prevTokenLineStartOffset = 0, scanError = 0;
+  function scanHexDigits(count, exact) {
+    var digits = 0;
+    var value2 = 0;
+    while (digits < count || !exact) {
+      var ch = text.charCodeAt(pos);
+      if (ch >= 48 && ch <= 57) {
+        value2 = value2 * 16 + ch - 48;
+      } else if (ch >= 65 && ch <= 70) {
+        value2 = value2 * 16 + ch - 65 + 10;
+      } else if (ch >= 97 && ch <= 102) {
+        value2 = value2 * 16 + ch - 97 + 10;
+      } else {
+        break;
+      }
+      pos++;
+      digits++;
+    }
+    if (digits < count) {
+      value2 = -1;
+    }
+    return value2;
+  }
+  function setPosition(newPosition) {
+    pos = newPosition;
+    value = "";
+    tokenOffset = 0;
+    token = 16;
+    scanError = 0;
+  }
+  function scanNumber() {
+    var start = pos;
+    if (text.charCodeAt(pos) === 48) {
+      pos++;
+    } else {
+      pos++;
+      while (pos < text.length && isDigit(text.charCodeAt(pos))) {
+        pos++;
+      }
+    }
+    if (pos < text.length && text.charCodeAt(pos) === 46) {
+      pos++;
+      if (pos < text.length && isDigit(text.charCodeAt(pos))) {
+        pos++;
+        while (pos < text.length && isDigit(text.charCodeAt(pos))) {
+          pos++;
+        }
+      } else {
+        scanError = 3;
+        return text.substring(start, pos);
+      }
+    }
+    var end = pos;
+    if (pos < text.length && (text.charCodeAt(pos) === 69 || text.charCodeAt(pos) === 101)) {
+      pos++;
+      if (pos < text.length && text.charCodeAt(pos) === 43 || text.charCodeAt(pos) === 45) {
+        pos++;
+      }
+      if (pos < text.length && isDigit(text.charCodeAt(pos))) {
+        pos++;
+        while (pos < text.length && isDigit(text.charCodeAt(pos))) {
+          pos++;
+        }
+        end = pos;
+      } else {
+        scanError = 3;
+      }
+    }
+    return text.substring(start, end);
+  }
+  function scanString() {
+    var result = "", start = pos;
+    while (true) {
+      if (pos >= len) {
+        result += text.substring(start, pos);
+        scanError = 2;
+        break;
+      }
+      var ch = text.charCodeAt(pos);
+      if (ch === 34) {
+        result += text.substring(start, pos);
+        pos++;
+        break;
+      }
+      if (ch === 92) {
+        result += text.substring(start, pos);
+        pos++;
+        if (pos >= len) {
+          scanError = 2;
+          break;
+        }
+        var ch2 = text.charCodeAt(pos++);
+        switch (ch2) {
+          case 34:
+            result += '"';
+            break;
+          case 92:
+            result += "\\";
+            break;
+          case 47:
+            result += "/";
+            break;
+          case 98:
+            result += "\b";
+            break;
+          case 102:
+            result += "\f";
+            break;
+          case 110:
+            result += "\n";
+            break;
+          case 114:
+            result += "\r";
+            break;
+          case 116:
+            result += "	";
+            break;
+          case 117:
+            var ch3 = scanHexDigits(4, true);
+            if (ch3 >= 0) {
+              result += String.fromCharCode(ch3);
+            } else {
+              scanError = 4;
+            }
+            break;
+          default:
+            scanError = 5;
+        }
+        start = pos;
+        continue;
+      }
+      if (ch >= 0 && ch <= 31) {
+        if (isLineBreak(ch)) {
+          result += text.substring(start, pos);
+          scanError = 2;
+          break;
+        } else {
+          scanError = 6;
+        }
+      }
+      pos++;
+    }
+    return result;
+  }
+  function scanNext() {
+    value = "";
+    scanError = 0;
+    tokenOffset = pos;
+    lineStartOffset = lineNumber;
+    prevTokenLineStartOffset = tokenLineStartOffset;
+    if (pos >= len) {
+      tokenOffset = len;
+      return token = 17;
+    }
+    var code = text.charCodeAt(pos);
+    if (isWhiteSpace(code)) {
+      do {
+        pos++;
+        value += String.fromCharCode(code);
+        code = text.charCodeAt(pos);
+      } while (isWhiteSpace(code));
+      return token = 15;
+    }
+    if (isLineBreak(code)) {
+      pos++;
+      value += String.fromCharCode(code);
+      if (code === 13 && text.charCodeAt(pos) === 10) {
+        pos++;
+        value += "\n";
+      }
+      lineNumber++;
+      tokenLineStartOffset = pos;
+      return token = 14;
+    }
+    switch (code) {
+      case 123:
+        pos++;
+        return token = 1;
+      case 125:
+        pos++;
+        return token = 2;
+      case 91:
+        pos++;
+        return token = 3;
+      case 93:
+        pos++;
+        return token = 4;
+      case 58:
+        pos++;
+        return token = 6;
+      case 44:
+        pos++;
+        return token = 5;
+      case 34:
+        pos++;
+        value = scanString();
+        return token = 10;
+      case 47:
+        var start = pos - 1;
+        if (text.charCodeAt(pos + 1) === 47) {
+          pos += 2;
+          while (pos < len) {
+            if (isLineBreak(text.charCodeAt(pos))) {
+              break;
+            }
+            pos++;
+          }
+          value = text.substring(start, pos);
+          return token = 12;
+        }
+        if (text.charCodeAt(pos + 1) === 42) {
+          pos += 2;
+          var safeLength = len - 1;
+          var commentClosed = false;
+          while (pos < safeLength) {
+            var ch = text.charCodeAt(pos);
+            if (ch === 42 && text.charCodeAt(pos + 1) === 47) {
+              pos += 2;
+              commentClosed = true;
+              break;
+            }
+            pos++;
+            if (isLineBreak(ch)) {
+              if (ch === 13 && text.charCodeAt(pos) === 10) {
+                pos++;
+              }
+              lineNumber++;
+              tokenLineStartOffset = pos;
+            }
+          }
+          if (!commentClosed) {
+            pos++;
+            scanError = 1;
+          }
+          value = text.substring(start, pos);
+          return token = 13;
+        }
+        value += String.fromCharCode(code);
+        pos++;
+        return token = 16;
+      case 45:
+        value += String.fromCharCode(code);
+        pos++;
+        if (pos === len || !isDigit(text.charCodeAt(pos))) {
+          return token = 16;
+        }
+      case 48:
+      case 49:
+      case 50:
+      case 51:
+      case 52:
+      case 53:
+      case 54:
+      case 55:
+      case 56:
+      case 57:
+        value += scanNumber();
+        return token = 11;
+      default:
+        while (pos < len && isUnknownContentCharacter(code)) {
+          pos++;
+          code = text.charCodeAt(pos);
+        }
+        if (tokenOffset !== pos) {
+          value = text.substring(tokenOffset, pos);
+          switch (value) {
+            case "true":
+              return token = 8;
+            case "false":
+              return token = 9;
+            case "null":
+              return token = 7;
+          }
+          return token = 16;
+        }
+        value += String.fromCharCode(code);
+        pos++;
+        return token = 16;
+    }
+  }
+  function isUnknownContentCharacter(code) {
+    if (isWhiteSpace(code) || isLineBreak(code)) {
+      return false;
+    }
+    switch (code) {
+      case 125:
+      case 93:
+      case 123:
+      case 91:
+      case 34:
+      case 58:
+      case 44:
+      case 47:
+        return false;
+    }
+    return true;
+  }
+  function scanNextNonTrivia() {
+    var result;
+    do {
+      result = scanNext();
+    } while (result >= 12 && result <= 15);
+    return result;
+  }
+  return {
+    setPosition,
+    getPosition: function() {
+      return pos;
+    },
+    scan: ignoreTrivia ? scanNextNonTrivia : scanNext,
+    getToken: function() {
+      return token;
+    },
+    getTokenValue: function() {
+      return value;
+    },
+    getTokenOffset: function() {
+      return tokenOffset;
+    },
+    getTokenLength: function() {
+      return pos - tokenOffset;
+    },
+    getTokenStartLine: function() {
+      return lineStartOffset;
+    },
+    getTokenStartCharacter: function() {
+      return tokenOffset - prevTokenLineStartOffset;
+    },
+    getTokenError: function() {
+      return scanError;
+    }
+  };
+}
+function isWhiteSpace(ch) {
+  return ch === 32 || ch === 9 || ch === 11 || ch === 12 || ch === 160 || ch === 5760 || ch >= 8192 && ch <= 8203 || ch === 8239 || ch === 8287 || ch === 12288 || ch === 65279;
+}
+function isLineBreak(ch) {
+  return ch === 10 || ch === 13 || ch === 8232 || ch === 8233;
+}
+function isDigit(ch) {
+  return ch >= 48 && ch <= 57;
+}
+var ParseOptions;
+(function(ParseOptions2) {
+  ParseOptions2.DEFAULT = {
+    allowTrailingComma: false
+  };
+})(ParseOptions || (ParseOptions = {}));
+var createScanner2 = createScanner;
+function createTokenizationSupport(supportComments) {
+  return {
+    getInitialState: () => new JSONState(null, null, false, null),
+    tokenize: (line, state) => tokenize(supportComments, line, state)
+  };
+}
+var TOKEN_DELIM_OBJECT = "delimiter.bracket.json";
+var TOKEN_DELIM_ARRAY = "delimiter.array.json";
+var TOKEN_DELIM_COLON = "delimiter.colon.json";
+var TOKEN_DELIM_COMMA = "delimiter.comma.json";
+var TOKEN_VALUE_BOOLEAN = "keyword.json";
+var TOKEN_VALUE_NULL = "keyword.json";
+var TOKEN_VALUE_STRING = "string.value.json";
+var TOKEN_VALUE_NUMBER = "number.json";
+var TOKEN_PROPERTY_NAME = "string.key.json";
+var TOKEN_COMMENT_BLOCK = "comment.block.json";
+var TOKEN_COMMENT_LINE = "comment.line.json";
+var ParentsStack = class {
+  constructor(parent, type) {
+    this.parent = parent;
+    this.type = type;
+  }
+  static pop(parents) {
+    if (parents) {
+      return parents.parent;
+    }
+    return null;
+  }
+  static push(parents, type) {
+    return new ParentsStack(parents, type);
+  }
+  static equals(a, b) {
+    if (!a && !b) {
+      return true;
+    }
+    if (!a || !b) {
+      return false;
+    }
+    while (a && b) {
+      if (a === b) {
+        return true;
+      }
+      if (a.type !== b.type) {
+        return false;
+      }
+      a = a.parent;
+      b = b.parent;
+    }
+    return true;
+  }
+};
+var JSONState = class {
+  constructor(state, scanError, lastWasColon, parents) {
+    __publicField(this, "_state");
+    __publicField(this, "scanError");
+    __publicField(this, "lastWasColon");
+    __publicField(this, "parents");
+    this._state = state;
+    this.scanError = scanError;
+    this.lastWasColon = lastWasColon;
+    this.parents = parents;
+  }
+  clone() {
+    return new JSONState(this._state, this.scanError, this.lastWasColon, this.parents);
+  }
+  equals(other) {
+    if (other === this) {
+      return true;
+    }
+    if (!other || !(other instanceof JSONState)) {
+      return false;
+    }
+    return this.scanError === other.scanError && this.lastWasColon === other.lastWasColon && ParentsStack.equals(this.parents, other.parents);
+  }
+  getStateData() {
+    return this._state;
+  }
+  setStateData(state) {
+    this._state = state;
+  }
+};
+function tokenize(comments, line, state, offsetDelta = 0) {
+  let numberOfInsertedCharacters = 0;
+  let adjustOffset = false;
+  switch (state.scanError) {
+    case 2:
+      line = '"' + line;
+      numberOfInsertedCharacters = 1;
+      break;
+    case 1:
+      line = "/*" + line;
+      numberOfInsertedCharacters = 2;
+      break;
+  }
+  const scanner = createScanner2(line);
+  let lastWasColon = state.lastWasColon;
+  let parents = state.parents;
+  const ret = {
+    tokens: [],
+    endState: state.clone()
+  };
+  while (true) {
+    let offset = offsetDelta + scanner.getPosition();
+    let type = "";
+    const kind = scanner.scan();
+    if (kind === 17) {
+      break;
+    }
+    if (offset === offsetDelta + scanner.getPosition()) {
+      throw new Error("Scanner did not advance, next 3 characters are: " + line.substr(scanner.getPosition(), 3));
+    }
+    if (adjustOffset) {
+      offset -= numberOfInsertedCharacters;
+    }
+    adjustOffset = numberOfInsertedCharacters > 0;
+    switch (kind) {
+      case 1:
+        parents = ParentsStack.push(parents, 0);
+        type = TOKEN_DELIM_OBJECT;
+        lastWasColon = false;
+        break;
+      case 2:
+        parents = ParentsStack.pop(parents);
+        type = TOKEN_DELIM_OBJECT;
+        lastWasColon = false;
+        break;
+      case 3:
+        parents = ParentsStack.push(parents, 1);
+        type = TOKEN_DELIM_ARRAY;
+        lastWasColon = false;
+        break;
+      case 4:
+        parents = ParentsStack.pop(parents);
+        type = TOKEN_DELIM_ARRAY;
+        lastWasColon = false;
+        break;
+      case 6:
+        type = TOKEN_DELIM_COLON;
+        lastWasColon = true;
+        break;
+      case 5:
+        type = TOKEN_DELIM_COMMA;
+        lastWasColon = false;
+        break;
+      case 8:
+      case 9:
+        type = TOKEN_VALUE_BOOLEAN;
+        lastWasColon = false;
+        break;
+      case 7:
+        type = TOKEN_VALUE_NULL;
+        lastWasColon = false;
+        break;
+      case 10:
+        const currentParent = parents ? parents.type : 0;
+        const inArray = currentParent === 1;
+        type = lastWasColon || inArray ? TOKEN_VALUE_STRING : TOKEN_PROPERTY_NAME;
+        lastWasColon = false;
+        break;
+      case 11:
+        type = TOKEN_VALUE_NUMBER;
+        lastWasColon = false;
+        break;
+    }
+    if (comments) {
+      switch (kind) {
+        case 12:
+          type = TOKEN_COMMENT_LINE;
+          break;
+        case 13:
+          type = TOKEN_COMMENT_BLOCK;
+          break;
+      }
+    }
+    ret.endState = new JSONState(state.getStateData(), scanner.getTokenError(), lastWasColon, parents);
+    ret.tokens.push({
+      startIndex: offset,
+      scopes: type
+    });
+  }
+  return ret;
+}
+var JSONDiagnosticsAdapter = class extends DiagnosticsAdapter {
+  constructor(languageId, worker, defaults) {
+    super(languageId, worker, defaults.onDidChange);
+    this._disposables.push(monaco_editor_core_exports.editor.onWillDisposeModel((model) => {
+      this._resetSchema(model.uri);
+    }));
+    this._disposables.push(monaco_editor_core_exports.editor.onDidChangeModelLanguage((event) => {
+      this._resetSchema(event.model.uri);
+    }));
+  }
+  _resetSchema(resource) {
+    this._worker().then((worker) => {
+      worker.resetSchema(resource.toString());
+    });
+  }
+};
+function setupMode(defaults) {
+  const disposables = [];
+  const providers = [];
+  const client = new WorkerManager(defaults);
+  disposables.push(client);
+  const worker = (...uris) => {
+    return client.getLanguageServiceWorker(...uris);
+  };
+  function registerProviders() {
+    const { languageId, modeConfiguration: modeConfiguration2 } = defaults;
+    disposeAll(providers);
+    if (modeConfiguration2.documentFormattingEdits) {
+      providers.push(monaco_editor_core_exports.languages.registerDocumentFormattingEditProvider(languageId, new DocumentFormattingEditProvider(worker)));
+    }
+    if (modeConfiguration2.documentRangeFormattingEdits) {
+      providers.push(monaco_editor_core_exports.languages.registerDocumentRangeFormattingEditProvider(languageId, new DocumentRangeFormattingEditProvider(worker)));
+    }
+    if (modeConfiguration2.completionItems) {
+      providers.push(monaco_editor_core_exports.languages.registerCompletionItemProvider(languageId, new CompletionAdapter(worker, [" ", ":", '"'])));
+    }
+    if (modeConfiguration2.hovers) {
+      providers.push(monaco_editor_core_exports.languages.registerHoverProvider(languageId, new HoverAdapter(worker)));
+    }
+    if (modeConfiguration2.documentSymbols) {
+      providers.push(monaco_editor_core_exports.languages.registerDocumentSymbolProvider(languageId, new DocumentSymbolAdapter(worker)));
+    }
+    if (modeConfiguration2.tokens) {
+      providers.push(monaco_editor_core_exports.languages.setTokensProvider(languageId, createTokenizationSupport(true)));
+    }
+    if (modeConfiguration2.colors) {
+      providers.push(monaco_editor_core_exports.languages.registerColorProvider(languageId, new DocumentColorAdapter(worker)));
+    }
+    if (modeConfiguration2.foldingRanges) {
+      providers.push(monaco_editor_core_exports.languages.registerFoldingRangeProvider(languageId, new FoldingRangeAdapter(worker)));
+    }
+    if (modeConfiguration2.diagnostics) {
+      providers.push(new JSONDiagnosticsAdapter(languageId, worker, defaults));
+    }
+    if (modeConfiguration2.selectionRanges) {
+      providers.push(monaco_editor_core_exports.languages.registerSelectionRangeProvider(languageId, new SelectionRangeAdapter(worker)));
+    }
+  }
+  registerProviders();
+  disposables.push(monaco_editor_core_exports.languages.setLanguageConfiguration(defaults.languageId, richEditConfiguration));
+  let modeConfiguration = defaults.modeConfiguration;
+  defaults.onDidChange((newDefaults) => {
+    if (newDefaults.modeConfiguration !== modeConfiguration) {
+      modeConfiguration = newDefaults.modeConfiguration;
+      registerProviders();
+    }
+  });
+  disposables.push(asDisposable(providers));
+  return asDisposable(disposables);
+}
+function asDisposable(disposables) {
+  return { dispose: () => disposeAll(disposables) };
+}
+function disposeAll(disposables) {
+  while (disposables.length) {
+    disposables.pop().dispose();
+  }
+}
+var richEditConfiguration = {
+  wordPattern: /(-?\d*\.\d\w*)|([^\[\{\]\}\:\"\,\s]+)/g,
+  comments: {
+    lineComment: "//",
+    blockComment: ["/*", "*/"]
+  },
+  brackets: [
+    ["{", "}"],
+    ["[", "]"]
+  ],
+  autoClosingPairs: [
+    { open: "{", close: "}", notIn: ["string"] },
+    { open: "[", close: "]", notIn: ["string"] },
+    { open: '"', close: '"', notIn: ["string"] }
+  ]
+};
+export {
+  CompletionAdapter,
+  DefinitionAdapter,
+  DiagnosticsAdapter,
+  DocumentColorAdapter,
+  DocumentFormattingEditProvider,
+  DocumentHighlightAdapter,
+  DocumentLinkAdapter,
+  DocumentRangeFormattingEditProvider,
+  DocumentSymbolAdapter,
+  FoldingRangeAdapter,
+  HoverAdapter,
+  ReferenceAdapter,
+  RenameAdapter,
+  SelectionRangeAdapter,
+  WorkerManager,
+  fromPosition,
+  fromRange,
+  setupMode,
+  toRange,
+  toTextEdit
+};
