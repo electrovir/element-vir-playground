@@ -1,0 +1,48 @@
+const defaultInitText: string = `import { defineElement, assign, html, css } from 'element-vir';
+
+export const MyElement = defineElement<{text: string}>()({
+tagName: 'my-element',
+styles: css \`
+:host {
+    display: inline-block;
+    padding: 4px;
+    border: 2px solid dodgerblue;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+:host(:hover) {
+    border-color: red;
+}
+\`,
+renderCallback: ({ inputs }) => {
+return html \`
+    \${inputs.text || 'hello there'}
+\`;
+},
+});
+export const MyElement2 = defineElement()({
+tagName: 'my-element-2',
+styles: css \`
+:host {
+    display: inline-block;
+    padding: 4px;
+    border: 2px solid mediumvioletred;
+    border-radius: 4px;   
+}
+\`,
+renderCallback: ({ inputs }) => {
+return html \`
+    <\${MyElement}
+        \${assign(MyElement, { text: 'yo' })}
+    ></\${MyElement}>
+\`;
+},
+});
+`;
+
+const version = 1;
+
+export function getInitialCode() {
+    return window.localStorage.getItem(`element-vir-code-input-v${version}`) ?? defaultInitText;
+}
