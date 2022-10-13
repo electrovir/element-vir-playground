@@ -42,11 +42,9 @@ function transformCode(code: string) {
 
     return {
         transformedCode: code
-            .replace(/import [^;]+;/g, '')
-            .replace(/export/g, '')
-            .replace(/ html\s*`/g, ' window.elementVir.html`')
-            .replace(/(\W)assign\s*\(/g, '$1window.elementVir.assign(')
-            .replace(/(\W)listen\s*\(/g, '$1window.elementVir.listen('),
+            .replace(/^import /, 'const ')
+            .replace("from 'element-vir';", '= window.elementVir;')
+            .replace(/export/g, ''),
         tagNames,
     };
 }

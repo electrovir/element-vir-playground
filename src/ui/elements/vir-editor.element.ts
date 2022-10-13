@@ -2,6 +2,7 @@ import * as TypeScriptSandbox from '@typescript/sandbox';
 import {randomString} from 'augment-vir';
 import {defineElement, defineElementEvent, html, onDomCreated} from 'element-vir';
 import * as monaco from 'monaco-editor';
+import {addEventListeners} from '../directives/add-event-listeners';
 
 function getGlobalEditorPromise(): Promise<{
     sandbox: typeof TypeScriptSandbox;
@@ -11,6 +12,8 @@ function getGlobalEditorPromise(): Promise<{
     return (window as any).editorPromise ?? Promise.reject('editor promise was not set');
 }
 
+const debounceTimeout = 1000;
+
 export const VirEditor = defineElement<{initialText: string}>()({
     tagName: 'vir-editor',
     stateInit: {
@@ -19,24 +22,40 @@ export const VirEditor = defineElement<{initialText: string}>()({
         sandbox: undefined as
             | undefined
             | ReturnType<typeof TypeScriptSandbox['createTypeScriptSandbox']>,
+        debounceTimestamp: undefined as undefined | number,
     },
     events: {
         codeChange: defineElementEvent<string>(),
         loadedChange: defineElementEvent<boolean>(),
     },
     renderCallback: ({state, inputs, updateState, events, dispatch}) => {
-        async function emitCode() {
+        function emitCode() {
             if (!state.sandbox) {
                 return;
             }
-            const result = await state.sandbox.getEmitResult();
-            const outputText = result.outputFiles[0]?.text;
-            if (!outputText) {
-                throw new Error(`no output text`);
+            if (
+                state.debounceTimestamp != undefined &&
+                Date.now() - state.debounceTimestamp < debounceTimeout
+            ) {
+                return;
             }
 
-            window.localStorage.setItem('element-vir-code-input', outputText);
-            dispatch(new events.codeChange(outputText));
+            updateState({debounceTimestamp: Date.now()});
+
+            setTimeout(async () => {
+                updateState({debounceTimestamp: undefined});
+                if (!state.sandbox) {
+                    return;
+                }
+                const result = await state.sandbox.getEmitResult();
+                const outputText = result.outputFiles[0]?.text;
+                if (!outputText) {
+                    throw new Error(`no output text`);
+                }
+
+                window.localStorage.setItem('element-vir-code-input', outputText);
+                dispatch(new events.codeChange(outputText));
+            }, debounceTimeout);
         }
 
         return state.loading
@@ -72,9 +91,19 @@ export const VirEditor = defineElement<{initialText: string}>()({
                               editorParams.ts,
                           );
                           sandbox.editor.focus();
-                          editorElement.addEventListener('input', async () => {
-                              await emitCode();
-                          });
+                          addEventListeners(
+                              editorElement,
+                              [
+                                  'input',
+                                  'paste',
+                                  'cut',
+                                  'change',
+                                  'keyup',
+                              ],
+                              async () => {
+                                  await emitCode();
+                              },
+                          );
                           updateState({
                               editorElement,
                               sandbox,
