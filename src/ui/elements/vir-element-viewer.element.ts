@@ -2,6 +2,9 @@ import {randomString, safeMatch} from 'augment-vir';
 import {css, defineElement, html} from 'element-vir';
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
 
+// keep a reference to this so the eval can use it
+(window as any).html = html;
+
 export const VirElementViewer = defineElement<{
     code: string;
 }>()({
@@ -16,7 +19,7 @@ export const VirElementViewer = defineElement<{
     `,
     renderCallback: ({inputs}) => {
         const {transformedCode, tagNames} = transformCode(inputs.code);
-        console.log('evaling code');
+        console.log('evaling code', transformedCode);
         eval(transformedCode);
         return html`
             ${unsafeHTML(tagNames.map((tagName) => `<${tagName}></${tagName}>`).join('<br />'))}
@@ -36,6 +39,8 @@ function transformCode(code: string) {
     const tagNames = tagNameDefinitions.map(
         (tagNameDefinition) => safeMatch(tagNameDefinition, /tagName: '(.+)'/)[1],
     );
+
+    code = code.replace(/ html\s*`/g, ' window.html`');
 
     return {
         transformedCode: code.replace(/import [^;]+;/g, '').replace(/export/g, ''),
