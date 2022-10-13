@@ -6,6 +6,9 @@ export default defineConfig({
     ...(process.env.CI
         ? {
               base: `/${process.env.npm_package_name}/`,
+              build: {
+                  minify: false,
+              },
           }
         : {}),
 });
